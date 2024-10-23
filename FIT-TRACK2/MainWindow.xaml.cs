@@ -43,10 +43,11 @@ namespace FIT_TRACK2
         }
 
 
-        LogInViewModel Loggain = new LogInViewModel();
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
+            LogInViewModel Loggain = new LogInViewModel();
             Loggain.SignIn();
+            this.Close();
         }
     }
 }

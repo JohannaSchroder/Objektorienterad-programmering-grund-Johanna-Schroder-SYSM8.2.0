@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FIT_TRACK2.ViewModel
 {
-    class baseViewModel : INotifyPropertyChanged
+    class baseViewModel : INotifyPropertyChanged//så andra klasser kan ärva här i från.
     {
             public event PropertyChangedEventHandler? PropertyChanged;
             private void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -6,44 +6,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace FIT_TRACK2
 {
-    class LogInViewModel : baseViewModel
+    class LogInViewModel : baseViewModel//har gjort en klass så jag ska slippa lägga in Inotify..
     {
         private string _username;
-            public string Username
+            public string UserNameBox
         {
             get { return _username; }
             set 
             { 
                 _username = value;
-                OnPropertyChanged(nameof(Username));
+                OnPropertyChanged(nameof(UserNameBox));
             }
         }
 
         private string _password;
-        public string Password
+        public string PasswordBox
         {
             get { return _password; }
             set 
             { 
                 _password = value;
-                OnPropertyChanged(nameof(Password));
+                OnPropertyChanged(nameof(PasswordBox));
             }
         }
-
-
+        //metoder
         AdminUser AdminAdmin = new AdminUser("admin", "password", "Sweden");
         User UserUser = new User("viva", "hamster", "Sweden");
-
-        //metoder
         public void SignIn()
         {
-            if (Username == "admin" && Password == "password")
+            if (UserNameBox == "admin" && PasswordBox == "password")
             {
-                AdminAdmin.SignIn();
+                AdminAdmin.MenageAllWorkouts();
                 AddWorkoutWindow AddWindow= new AddWorkoutWindow();
                 AddWindow.Show();
             }
@@ -53,7 +52,6 @@ namespace FIT_TRACK2
                 UserDetailWindow UserWindow = new UserDetailWindow();
                 UserWindow.Show();
             }
-
         }
 
 
