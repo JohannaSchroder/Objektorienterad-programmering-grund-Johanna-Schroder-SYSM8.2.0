@@ -20,7 +20,7 @@ namespace FIT_TRACK2.Klasser
         }
 
         //metoder
-        public abstract void SignIn();
+        public abstract void SignIn();//abstrakt metod som måste användas i de klasser som ärver från Person
 
     }
 }

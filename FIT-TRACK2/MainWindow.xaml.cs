@@ -1,8 +1,11 @@
-﻿using System;
+﻿using FIT_TRACK2.Klasser;
+using FIT_TRACK2.Windows;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,11 +23,12 @@ namespace FIT_TRACK2
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new LogInViewModel();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -38,9 +42,11 @@ namespace FIT_TRACK2
 
         }
 
+
+        LogInViewModel Loggain = new LogInViewModel();
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-
+            Loggain.SignIn();
         }
     }
 }

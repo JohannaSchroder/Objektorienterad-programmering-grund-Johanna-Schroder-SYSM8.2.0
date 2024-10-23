@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FIT_TRACK2.Klasser
 {
@@ -10,22 +11,19 @@ namespace FIT_TRACK2.Klasser
     {
         //Egenskap
 
-
         //Konstruktor
         public AdminUser(string UserName, string Password, string Country)
             : base(UserName, Password, Country)
         {
+            this.Country = Country;
+            this.UserName = UserName;
+            this.Password = Password;
         }
 
         //Metod
-        public override void SignIn()//HÄR BEHÖVER DU FYLLA I KOD!!
-        {
-
-        }
-
         public void MenageAllWorkouts()//HÄR BEHÖVER DU FYLLA I KOD!!
         {
-
+            MessageBox.Show("Hej Admin! Här kan du lägga till och ändra träningspass");
         }
     }
 }
