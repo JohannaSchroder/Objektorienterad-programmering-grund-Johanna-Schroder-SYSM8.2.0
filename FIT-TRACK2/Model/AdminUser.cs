@@ -22,7 +22,7 @@ namespace FIT_TRACK2.Klasser
 
         //Metod
 
-        public void MenageAllWorkouts()//HÄR BEHÖVER DU FYLLA I KOD!!
+        public void MenageAllWorkouts()
         {
             MessageBox.Show("Hej Admin! Här kan du lägga till och ändra träningspass");
         }

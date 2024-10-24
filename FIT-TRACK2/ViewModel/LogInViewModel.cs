@@ -21,7 +21,7 @@ namespace FIT_TRACK2
             set 
             { 
                 _username = value;
-                OnPropertyChanged(nameof(UserNameBox));
+                OnPropertyChanged();
             }
         }
 
@@ -32,7 +32,7 @@ namespace FIT_TRACK2
             set 
             { 
                 _password = value;
-                OnPropertyChanged(nameof(PasswordBox));
+                OnPropertyChanged();
             }
         }
         //metoder
@@ -54,10 +54,10 @@ namespace FIT_TRACK2
             }
         }
 
-
-        private void OnPropertyChanged(string v)
+        private void OnPropertyChanged()
         {
             throw new NotImplementedException();
         }
+
     }
 }

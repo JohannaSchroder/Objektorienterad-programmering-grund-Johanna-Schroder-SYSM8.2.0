@@ -32,7 +32,7 @@
             FontSize="20"/>
             <TextBox 
             x:Name="UserName" 
-            Text="{Binding UserNameBox, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding UserNameBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Width="200" Height="30" 
             Grid.Row="2" 
             HorizontalAlignment="Center" 
@@ -45,7 +45,7 @@
             FontSize="20"/>
             <TextBox 
             x:Name="PassWord"
-            Text="{Binding PasswordBox, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding PasswordBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Width="200" Height="30" 
             Grid.Row="4" 
             HorizontalAlignment="Center" 
