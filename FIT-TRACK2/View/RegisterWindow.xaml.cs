@@ -23,5 +23,10 @@ namespace FIT_TRACK2.Windows
         {
             InitializeComponent();
         }
+
+        private void btnSignUp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -6,7 +6,57 @@
         xmlns:local="clr-namespace:FIT_TRACK2.Windows"
         mc:Ignorable="d"
         Title="RegisterWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Background="#D3D3D3">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <TextBlock 
+            Text="FIT-TRACKER" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Grid.Row="0" 
+            FontSize="50" 
+            Foreground="#DC143C"/>
+        <TextBlock
+            Text="Användarnamn"
+            Grid.Row="1"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center"
+            FontSize="20"/>
+        <TextBox
+            x:Name="UserNameinput" 
+            Text="{Binding UserNameInput, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Width="200" Height="30" 
+            Grid.Row="2" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"/>
+        <TextBlock
+            Text="Lösenord"
+            Grid.Row="3"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center"
+            FontSize="20"/>
+        <TextBox
+            x:Name="Passwordinput" 
+            Text="{Binding PasswordInput, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Width="200" Height="30" 
+            Grid.Row="4" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"/>
+        <Button
+            x:Name="btnSignUp"
+            Click="btnSignUp_Click"
+            Grid.Row="5"
+            Command="{Binding SignUpCommand}"
+            Content="Sign Up!"
+            FontSize="20"
+            Width="100" 
+            Height="30"
+            />
     </Grid>
 </Window>
