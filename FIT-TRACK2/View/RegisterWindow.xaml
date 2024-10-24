@@ -75,7 +75,7 @@
         <ComboBox
             x:Name="Land"
             Grid.Row="8"
-            ItemsSource="{Binding Land}" 
+            ItemsSource="{Binding Country, Mode=TwoWay}"
             SelectedItem="{Binding ValtLand}"
             Width="200" Height="30"
             />

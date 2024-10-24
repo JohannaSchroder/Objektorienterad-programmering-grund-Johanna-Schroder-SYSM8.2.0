@@ -1,17 +1,15 @@
-﻿using System;
+﻿using FIT_TRACK2.Klasser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FIT_TRACK2.ViewModel
 {
     class RegisterViewModel : baseViewModel
     {
-        private void OnPropertyChanged(string v)
-        {
-            throw new NotImplementedException();
-        }
 
         private string _userNameInput;
 		public string UserNameInput
@@ -24,7 +22,12 @@ namespace FIT_TRACK2.ViewModel
 			}
 		}
 
-		private string _passwordInput;
+        private void OnPropertyChanged()
+        {
+            throw new NotImplementedException();
+        }
+
+        private string _passwordInput;
 		public string PasswordInput
 		{
 			get { return _passwordInput; }
@@ -46,32 +49,52 @@ namespace FIT_TRACK2.ViewModel
 			}
 		}
 
-		private string _land;
-		public string Land
-		{
-			get { return _land; }
-			set 
-			{ 
-				_land = value; 
-				OnPropertyChanged();
-			}
-		}
-
 		private string _valtLand;
-
 		public string ValtLand
 		{
 			get { return _valtLand; }
 			set 
 			{ 
 				_valtLand = value;
-                OnPropertyChanged(nameof(Land));
+                OnPropertyChanged();
             }
 		}
 
-        public List<string> LandLista { get; set; }
-		LandLista = new List<string> {"Sweden", "Denmark", "Norway", "Finland", "Iceland"}
+        public List<string> Country { get; set; }//en lista med land
+		User.Användare _användare = new User.Användare();//hämtar från klassen Användare i modellen User
 
+		public void SignUp()
+		{
+            Country = new List<string> { "Sweden", "Denmark", "Norway", "Finland", "Iceland" };//en ifylld lista med land
+            if (string.IsNullOrEmpty(UserNameInput))//så inte användaren lämnar tomt
+			{
+				MessageBox.Show("Du måste välja ett användarnamn");
+				return;
+			}
+			if (string.IsNullOrEmpty(PasswordInput) || string.IsNullOrEmpty(ConfirmedPassword))//så inte användaren lämnar tomt
+            {
+				MessageBox.Show("Du måste välja ett lösenord");
+				return;
+			}
+			if (PasswordInput != ConfirmedPassword)//kontrollerar så lösenorden är samma
+			{
+				MessageBox.Show("Lösenordet överrenstämmer inte");
+				return;
+			}
+			if (string.IsNullOrEmpty(ValtLand))//man måste välja ett land
+			{
+				MessageBox.Show("Du måste välja ett land");
+			}
 
+			User NewUser = new User("admin", "password", "Sweden")
+			{ 
+				UserName = UserNameInput, Password = PasswordInput, Country = ValtLand
+			};
+
+			_användare.RegistreradeUsers(NewUser);
+
+			MessageBox.Show("Registreringen är färdig! Du tas tillbaka till inloggningssidan.");
+		}
+    }
 }
 

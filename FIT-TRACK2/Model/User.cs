@@ -30,7 +30,8 @@ namespace FIT_TRACK2.Klasser
             MessageBox.Show($"Hej {UserName}! Nu är det dags att träna.");
         }
 
-        public class Användare//en klass för att spara användare
+
+        public class Användare//en klass för att spara och lagra användare
         {
 
             private List<User> ListaUsers;//en tom lista

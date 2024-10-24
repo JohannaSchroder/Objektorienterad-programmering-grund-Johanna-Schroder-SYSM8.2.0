@@ -35,10 +35,11 @@ namespace FIT_TRACK2.Windows
         }
 
 
-
         private void btnSignUp_Click(object sender, RoutedEventArgs e)
         {
-
+            RegisterViewModel register = new RegisterViewModel();
+            register.SignUp();
+            this.Close();
         }
 
 
