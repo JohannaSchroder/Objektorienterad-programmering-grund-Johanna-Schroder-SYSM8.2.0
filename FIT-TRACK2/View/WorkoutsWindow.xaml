@@ -6,7 +6,32 @@
         xmlns:local="clr-namespace:FIT_TRACK2.Windows"
         mc:Ignorable="d"
         Title="WorkoutsWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Background="#D3D3D3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock 
+            Text="FIT-TRACKER" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Grid.Row="0" 
+            FontSize="50" 
+            Foreground="#DC143C"/>
+        <TextBlock
+            Text="Träningspass"
+            Grid.Row="1"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom"
+            FontSize="20"/>
+        <ComboBox
+            x:Name="Workouts"
+            Grid.Row="2"
+            ItemsSource="{Binding Workouts}"
+            SelectedItem="{Binding SelectedWorkouts}"
+            Width="200" Height="30"
+            />
     </Grid>
 </Window>
