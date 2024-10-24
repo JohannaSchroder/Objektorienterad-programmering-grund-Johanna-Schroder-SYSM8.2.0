@@ -30,5 +30,32 @@ namespace FIT_TRACK2.Klasser
             MessageBox.Show($"Hej {UserName}! Nu är det dags att träna.");
         }
 
+        public class Användare//en klass för att spara användare
+        {
+
+            private List<User> ListaUsers;//en tom lista
+
+            public Användare()//Konstruktor till listan med användare
+            {
+                ListaUsers = new List<User>();//en lista att fylla med användare
+            }
+
+            public void RegistreradeUsers(User newUser)//metod för att lägga till en ny användare
+            {
+                ListaUsers.Add(newUser);
+            }
+            public bool UsernameUpptaget(string userName)//en metod för att kolla om användarnamn är upptaget dig registrering
+            {
+                foreach (var user in ListaUsers)
+                {
+                    if (user.UserName == userName)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
     }
 }

@@ -46,7 +46,7 @@
             VerticalAlignment="Bottom"
             FontSize="20"/>
         <TextBox
-            x:Name="Passwordinput" 
+            x:Name="PasswordInput" 
             Text="{Binding PasswordInput, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Width="200" Height="30" 
             Grid.Row="4" 
@@ -59,8 +59,8 @@
             VerticalAlignment="Bottom"
             FontSize="20"/>
         <TextBox
-            x:Name="PasswordInput" 
-            Text="{Binding PasswordInput, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            x:Name="ConfirmedPassword" 
+            Text="{Binding ConfirmedPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Width="200" Height="30" 
             Grid.Row="6" 
             HorizontalAlignment="Center" 
@@ -72,9 +72,11 @@
             VerticalAlignment="Bottom"
             FontSize="20"
             />
-        <ListBox
+        <ComboBox
             x:Name="Land"
             Grid.Row="8"
+            ItemsSource="{Binding Land}" 
+            SelectedItem="{Binding ValtLand}"
             Width="200" Height="30"
             />
         <Button
