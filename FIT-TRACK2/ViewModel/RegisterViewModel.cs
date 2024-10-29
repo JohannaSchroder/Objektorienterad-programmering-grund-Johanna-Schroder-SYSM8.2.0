@@ -9,32 +9,32 @@ using System.Windows;
 
 namespace FIT_TRACK2.ViewModel
 {
-    class RegisterViewModel : baseViewModel
-    {
+	class RegisterViewModel : baseViewModel
+	{
 
-        private string _userNameInput;
+		private string _userNameInput;
 		public string UserNameInput
 		{
 			get { return _userNameInput; }
-			set 
-			{ 
+			set
+			{
 				_userNameInput = value;
 				OnPropertyChanged();
 			}
 		}
 
-        private void OnPropertyChanged()
-        {
-            throw new NotImplementedException();
-        }
+		private void OnPropertyChanged()
+		{
+			throw new NotImplementedException();
+		}
 
-        private string _passwordInput;
+		private string _passwordInput;
 		public string PasswordInput
 		{
 			get { return _passwordInput; }
-			set 
-			{ 
-				_passwordInput = value; 
+			set
+			{
+				_passwordInput = value;
 				OnPropertyChanged();
 			}
 		}
@@ -43,9 +43,9 @@ namespace FIT_TRACK2.ViewModel
 		public string ConfirmedPassword
 		{
 			get { return _confirmedPassword; }
-			set 
-			{ 
-				_confirmedPassword = value; 
+			set
+			{
+				_confirmedPassword = value;
 				OnPropertyChanged();
 			}
 		}
@@ -54,47 +54,35 @@ namespace FIT_TRACK2.ViewModel
 		public string ValtLand
 		{
 			get { return _valtLand; }
-			set 
-			{ 
+			set
+			{
 				_valtLand = value;
-                OnPropertyChanged();
-            }
+				OnPropertyChanged();
+			}
+		}
+		private UserService _userService;
+        public RelayCommand SignUpCommand { get; }
+
+		public RegisterViewModel()
+		{
+            _userService = new UserService();
+            SignUpCommand = new RelayCommand(SignUp);
 		}
 
-        public ObservableCollection<string> Country { get; set; }//en lista med land
-		User.Användare _användare = new User.Användare();//hämtar från klassen Användare i modellen User
-
-		public void SignUp()
+		private void SignUp()
 		{
-            Country = new ObservableCollection<string> { "Sweden", "Denmark", "Norway", "Finland", "Iceland" };//en ifylld lista med land
-            if (string.IsNullOrEmpty(UserNameInput))//så inte användaren lämnar tomt
-			{
-				MessageBox.Show("Du måste välja ett användarnamn");
-				return;
-			}
-			if (string.IsNullOrEmpty(PasswordInput) || string.IsNullOrEmpty(ConfirmedPassword))//så inte användaren lämnar tomt
-            {
-				MessageBox.Show("Du måste välja ett lösenord");
-				return;
-			}
-			if (PasswordInput != ConfirmedPassword)//kontrollerar så lösenorden är samma
-			{
-				MessageBox.Show("Lösenordet överrenstämmer inte");
-				return;
-			}
-			if (string.IsNullOrEmpty(ValtLand))//man måste välja ett land
-			{
-				MessageBox.Show("Du måste välja ett land");
-			}
-
-			User NewUser = new User("admin", "password", "Sweden")
+			try
 			{ 
-				UserName = UserNameInput, Password = PasswordInput, Country = ValtLand
-			};
+				_userService.RegisterUser(UserNameInput, PasswordInput, ValtLand);
+				MessageBox.Show("Du är nu registrerad. Du kan nu logga in!");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Något gick fel, försök igen!");
+			}
 
-			_användare.RegistreradeUsers(NewUser);
-
-			MessageBox.Show("Registreringen är färdig! Du tas tillbaka till inloggningssidan.");
+			MainWindow mainWindow = new MainWindow();
+			mainWindow.Show();
 		}
     }
 }

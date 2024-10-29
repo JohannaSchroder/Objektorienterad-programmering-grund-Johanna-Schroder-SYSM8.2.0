@@ -9,7 +9,6 @@ namespace FIT_TRACK2.Klasser
 {
     class AdminUser : User
     {
-        //Egenskap
 
         //Konstruktor
         public AdminUser(string UserName, string Password, string Country)
