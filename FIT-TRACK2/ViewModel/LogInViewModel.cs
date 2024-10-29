@@ -38,6 +38,15 @@ namespace FIT_TRACK2
         //metoder
         AdminUser AdminAdmin = new AdminUser("admin", "password", "Sweden");
         User UserUser = new User("viva", "hamster", "Sweden");
+
+        public RelayCommand LogInCommand { get; }
+        public RelayCommand SignUpCommand { get; }
+
+        public LogInViewModel()
+        {
+            LogInCommand = new RelayCommand(SignIn);
+            SignUpCommand = new RelayCommand(OpenRegisterWindow);
+        }
         public void SignIn()
         {
             if (UserNameBox == "admin" && PasswordBox == "password")
@@ -45,13 +54,22 @@ namespace FIT_TRACK2
                 AdminAdmin.MenageAllWorkouts();
                 AddWorkoutWindow AddWindow= new AddWorkoutWindow();
                 AddWindow.Show();
+                Application.Current.MainWindow.Close();
             }
             else
             {
                 UserUser.SignIn();
                 WorkoutsWindow WorkoutWindow = new WorkoutsWindow();
                 WorkoutWindow.Show();
+                Application.Current.MainWindow.Close();
             }
+        }
+
+        public void OpenRegisterWindow()
+        { 
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
+            Application.Current.MainWindow.Close();
         }
 
         private void OnPropertyChanged()

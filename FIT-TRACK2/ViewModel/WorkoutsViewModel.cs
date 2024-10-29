@@ -37,8 +37,8 @@ namespace FIT_TRACK2.ViewModel
 
             OpenUserDetailsCommand = new RelayCommand(OpenUserDetails);
             AddWorkoutCommand = new RelayCommand(AddWorkout);
-            ShowDetailsCommand = new RelayCommand(ShowDetails);
-            RemoveWorkoutCommand = new RelayCommand(RemoveWorkout);
+            ShowDetailsCommand = new RelayCommand(ShowDetails, CanShowDetailsOrRemove);
+            RemoveWorkoutCommand = new RelayCommand(RemoveWorkout, CanShowDetailsOrRemove);
             SignOutCommand = new RelayCommand(SignOut);
             ShowInfoCommand = new RelayCommand(ShowInfo);
         }
@@ -75,7 +75,7 @@ namespace FIT_TRACK2.ViewModel
             }
             Workouts.Remove(SelectedWorkout);
         }
-
+        private bool CanShowDetailsOrRemove() => SelectedWorkout != null;
         private void SignOut()
         {
             MainWindow LogIn = new MainWindow();

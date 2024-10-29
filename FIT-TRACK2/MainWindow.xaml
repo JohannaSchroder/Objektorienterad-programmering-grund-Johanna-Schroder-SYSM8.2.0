@@ -54,7 +54,6 @@
             x:Name="LogIn" 
             Command="{Binding LogInCommand}"
             Content="Login" 
-            Click="LogIn_Click"
             Grid.Row="5" 
             Width="100" 
             Height="30"/>
@@ -62,7 +61,6 @@
             x:Name="SignUp" 
             Command="{Binding SignUpCommand}"
             Content="Signup" 
-            Click="SignUp_Click" 
             Grid.Row="6" 
             Width="100" 
             Height="30"

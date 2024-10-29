@@ -37,19 +37,5 @@ namespace FIT_TRACK2
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SignUp_Click(object sender, RoutedEventArgs e)
-        {
-            RegisterWindow registerWindow = new RegisterWindow();
-            registerWindow.Show();
-            this.Close();
-        }
-
-
-        private void LogIn_Click(object sender, RoutedEventArgs e)
-        {
-            LogInViewModel Loggain = new LogInViewModel();
-            Loggain.SignIn();
-            this.Close();
-        }
     }
 }
