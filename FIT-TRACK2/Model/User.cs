@@ -39,13 +39,14 @@ namespace FIT_TRACK2.Klasser
             public Användare()//Konstruktor till listan med användare
             {
                 ListaUsers = new List<User>();//en lista att fylla med användare
+                //lägg in användare här.
             }
 
             public void RegistreradeUsers(User newUser)//metod för att lägga till en ny användare
             {
                 ListaUsers.Add(newUser);
             }
-            public bool UsernameUpptaget(string userName)//en metod för att kolla om användarnamn är upptaget dig registrering
+            public bool UsernameUpptaget(string userName)//en metod för att kolla om användarnamn är upptaget vid registrering
             {
                 foreach (var user in ListaUsers)
                 {

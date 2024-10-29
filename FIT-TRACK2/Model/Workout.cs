@@ -6,7 +6,28 @@ using System.Threading.Tasks;
 
 namespace FIT_TRACK2.Klasser
 {
-    class Workout
+    abstract class Workout//abstrakt basklass
     {
+        //egenskaper
+        public DateTime Date { get; set; }
+        public string Type { get; set; }
+        public TimeSpan Duration { get; set; }
+        public int CaloriesBurned { get; set; }
+        public string Notes { get; set; }
+
+
+        //konstruktor
+        public Workout(DateTime Date, string Type, TimeSpan Duration, int CaloriesBurned, string Notes)
+        { 
+            this.Date = Date;
+            this.Type = Type;
+            this.Duration = Duration;
+            this.CaloriesBurned = CaloriesBurned;
+            this.Notes = Notes;
+        }
+
+
+        //Metoder
+        public abstract int CalculateCaloriesBurned();
     }
 }

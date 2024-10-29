@@ -1,6 +1,7 @@
 ﻿using FIT_TRACK2.Klasser;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,12 +61,12 @@ namespace FIT_TRACK2.ViewModel
             }
 		}
 
-        public List<string> Country { get; set; }//en lista med land
+        public ObservableCollection<string> Country { get; set; }//en lista med land
 		User.Användare _användare = new User.Användare();//hämtar från klassen Användare i modellen User
 
 		public void SignUp()
 		{
-            Country = new List<string> { "Sweden", "Denmark", "Norway", "Finland", "Iceland" };//en ifylld lista med land
+            Country = new ObservableCollection<string> { "Sweden", "Denmark", "Norway", "Finland", "Iceland" };//en ifylld lista med land
             if (string.IsNullOrEmpty(UserNameInput))//så inte användaren lämnar tomt
 			{
 				MessageBox.Show("Du måste välja ett användarnamn");

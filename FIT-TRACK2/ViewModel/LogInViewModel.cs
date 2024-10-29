@@ -49,8 +49,8 @@ namespace FIT_TRACK2
             else
             {
                 UserUser.SignIn();
-                UserDetailWindow UserWindow = new UserDetailWindow();
-                UserWindow.Show();
+                WorkoutsWindow WorkoutWindow = new WorkoutsWindow();
+                WorkoutWindow.Show();
             }
         }
 

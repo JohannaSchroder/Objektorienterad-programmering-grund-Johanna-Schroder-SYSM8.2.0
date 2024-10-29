@@ -8,9 +8,12 @@
         Title="WorkoutsWindow" Height="450" Width="800">
     <Grid Background="#D3D3D3">
         <Grid.RowDefinitions>
-            <RowDefinition Height="250"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
         <TextBlock 
@@ -20,18 +23,71 @@
             Grid.Row="0" 
             FontSize="50" 
             Foreground="#DC143C"/>
-        <TextBlock
-            Text="Träningspass"
+        <TextBlock 
+            Text="{Binding Username}"
+            Grid.Row="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="150"
+            Height="30"/>
+        <Button 
             Grid.Row="1"
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Bottom"
-            FontSize="20"/>
-        <ComboBox
-            x:Name="Workouts"
+            Width="100"
+            Height="50"
+            x:Name="btnUser" 
+            Content="Inställningar" 
+            Command="{Binding OpenUserDetailWindow}"/>
+        <Button
             Grid.Row="2"
-            ItemsSource="{Binding Workouts}"
-            SelectedItem="{Binding SelectedWorkouts}"
-            Width="200" Height="30"
-            />
+            Width="200"
+            Height="50"
+            x:Name="btnAddWorkout"
+            Content="Lägg till Träningspass"
+            Command="{Binding AddWorkoutCommand}"/>
+
+        <ListBox 
+            Grid.Row="3"
+            Width="200"
+            Height="50"
+            ItemsSource="{Binding Workouts}" 
+            SelectedItem="{Binding SelectedWorkouts}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Date}" />
+                        <TextBlock Text="{Binding Type}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button 
+            Grid.Row="4"
+            Width="100"
+            Height="50"
+            HorizontalAlignment="Right"
+            Content="Details" 
+            Command="{Binding ShowDetailsCommand}" />
+        <Button 
+            Grid.Row="4"
+            Width="100"
+            Height="50"
+            HorizontalAlignment="Left"
+            Content="Remove" 
+            Command="{Binding RemoveWorkoutCommand}" />
+        <Button 
+            Grid.Row="5"
+            Width="100"
+            Height="50"
+            HorizontalAlignment="Right"
+            Content="Info" 
+            Command="{Binding ShowInfoCommand}" />
+        <Button 
+            Grid.Row="5"
+            Width="100"
+            Height="50"
+            HorizontalAlignment="Left"
+            Content="Sign Out" 
+            Command="{Binding SignOutCommand}" />
     </Grid>
 </Window>
