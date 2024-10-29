@@ -24,7 +24,7 @@
             FontSize="50" 
             Foreground="#DC143C"/>
         <TextBlock 
-            Text="{Binding Username}"
+            Text="{Binding UserName}"
             Grid.Row="0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"

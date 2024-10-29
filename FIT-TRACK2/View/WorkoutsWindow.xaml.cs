@@ -1,7 +1,9 @@
 ﻿using FIT_TRACK2.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,7 +20,7 @@ namespace FIT_TRACK2.Windows
     /// <summary>
     /// Interaction logic for WorkoutsWindow.xaml
     /// </summary>
-    public partial class WorkoutsWindow : Window
+    public partial class WorkoutsWindow : Window, INotifyPropertyChanged
     {
         public WorkoutsWindow()
         {
@@ -26,6 +28,11 @@ namespace FIT_TRACK2.Windows
             this.DataContext = new WorkoutsViewModel();
         }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         
     }

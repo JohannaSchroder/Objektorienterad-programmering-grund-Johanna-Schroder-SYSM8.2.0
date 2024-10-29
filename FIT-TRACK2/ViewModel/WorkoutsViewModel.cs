@@ -5,23 +5,23 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace FIT_TRACK2.ViewModel
 {
-    class WorkoutsViewMode : baseViewModel
+    class WorkoutsViewModel : baseViewModel
     {
+        public ObservableCollection<string> Workouts { get; set; }//lista för träningspass
 
-        public ObservableCollection<string> Workouts { get; set; }
+        public string UserName { get; set; }
 
-        public string Username { get; set; }
+        private string _selectedWorkout;
 
-        private int myVar;
-
-        public int MyProperty
+        public string SelectedWorkout
         {
-            get { return myVar; }
-            set { myVar = value; }
+            get { return _selectedWorkout; }
+            set { _selectedWorkout = value; }
         }
 
         public ICommand OpenUserDetailsCommand { get; set; }
@@ -31,9 +31,9 @@ namespace FIT_TRACK2.ViewModel
         public ICommand SignOutCommand { get; set; }
         public ICommand ShowInfoCommand { get; set; }
 
-        public WorkoutsViewMode()
+        public WorkoutsViewModel()
         { 
-            Workouts = new ObservableCollection<string> {"Cardio", "Strength"};
+            Workouts = new ObservableCollection<string>();
 
             OpenUserDetailsCommand = new RelayCommand(OpenUserDetails);
             AddWorkoutCommand = new RelayCommand(AddWorkout);
@@ -51,26 +51,39 @@ namespace FIT_TRACK2.ViewModel
 
         private void AddWorkout()
         {
-
+            AddWorkoutWindow addWorkout = new AddWorkoutWindow();
+            addWorkout.Show();
         }
 
         private void ShowDetails() 
         {
-        
+            if (SelectedWorkout == null)
+            {
+                MessageBox.Show("Du måste välja ett träningspass");
+                return;
+            }
+            WorkoutDetailWindow WorkoutDetail = new WorkoutDetailWindow();
+            WorkoutDetail.Show();
         }
 
         private void RemoveWorkout()
         {
-
+            if (SelectedWorkout == null)
+            {
+                MessageBox.Show("Du måste välja ett träningspass");
+                return;
+            }
+            Workouts.Remove(SelectedWorkout);
         }
 
         private void SignOut()
         {
-
+            MainWindow LogIn = new MainWindow();
+            LogIn.Show();
         }
         private void ShowInfo()
-        { 
-        
+        {
+            MessageBox.Show("Här kan du lägga till, ändra och ta bort träningspass. Du kan även ändra dina inställningar.");
         }
     }
 }
