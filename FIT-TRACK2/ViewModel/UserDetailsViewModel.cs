@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FIT_TRACK2.ViewModel
 {
-    class UserDetailsViewModel
+    class UserDetailsViewModel : baseViewModel
     {
     }
 }

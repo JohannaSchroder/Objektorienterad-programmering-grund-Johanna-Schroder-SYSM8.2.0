@@ -1,4 +1,5 @@
-﻿using FIT_TRACK2.Windows;
+﻿using FIT_TRACK2.Klasser;
+using FIT_TRACK2.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,78 +13,60 @@ namespace FIT_TRACK2.ViewModel
 {
     class WorkoutsViewModel : baseViewModel
     {
-        public ObservableCollection<string> Workouts { get; set; }//lista för träningspass
+        private WorkoutService _workoutService;
+        public ObservableCollection<Workout> Workouts { get;set; } = new ObservableCollection<Workout>();
 
-        public string UserName { get; set; }
-
-        private string _selectedWorkout;
-
-        public string SelectedWorkout
-        {
-            get { return _selectedWorkout; }
-            set { _selectedWorkout = value; }
-        }
-
-        public ICommand OpenUserDetailsCommand { get; set; }
         public ICommand AddWorkoutCommand { get; set; }
-        public ICommand ShowDetailsCommand { get; set; }
-        public ICommand RemoveWorkoutCommand { get; set; }
-        public ICommand SignOutCommand { get; set; }
-        public ICommand ShowInfoCommand { get; set; }
+        public ICommand RemoveWorkoutCommand { get;set; }
 
-        public WorkoutsViewModel()
-        { 
-            Workouts = new ObservableCollection<string>();
-
-            OpenUserDetailsCommand = new RelayCommand(OpenUserDetails);
+        public WorkoutsViewModel(WorkoutService workoutService)
+        {
+            _workoutService= workoutService;
+            LoadWorkouts();
             AddWorkoutCommand = new RelayCommand(AddWorkout);
-            ShowDetailsCommand = new RelayCommand(ShowDetails, CanShowDetailsOrRemove);
-            RemoveWorkoutCommand = new RelayCommand(RemoveWorkout, CanShowDetailsOrRemove);
-            SignOutCommand = new RelayCommand(SignOut);
-            ShowInfoCommand = new RelayCommand(ShowInfo);
+            RemoveWorkoutCommand = new RelayCommand(RemoveWorkout);
         }
 
-        private void OpenUserDetails()
-        { 
-            UserDetailWindow UserDetail = new UserDetailWindow();
-            UserDetail.Show();
+        private void LoadWorkouts()
+        {
+            var workouts = _workoutService.GetWorkouts();
+            Workouts.Clear();
+            foreach (var workout in workouts)
+            {
+                Workouts.Add(workout);
+            }
         }
-
         private void AddWorkout()
         {
-            AddWorkoutWindow addWorkout = new AddWorkoutWindow();
-            addWorkout.Show();
-        }
-
-        private void ShowDetails() 
-        {
-            if (SelectedWorkout == null)
+            var addWorkoutWindow = new AddWorkoutWindow();
+            if (addWorkoutWindow.ShowDialog() == true)
             {
-                MessageBox.Show("Du måste välja ett träningspass");
-                return;
+                var workout = addWorkoutWindow.NeWWorkout;
+                _workoutService.AddWorkout(workout);
+                Workouts.Add(workout);
             }
-            WorkoutDetailWindow WorkoutDetail = new WorkoutDetailWindow();
-            WorkoutDetail.Show();
         }
 
         private void RemoveWorkout()
         {
-            if (SelectedWorkout == null)
-            {
-                MessageBox.Show("Du måste välja ett träningspass");
-                return;
-            }
-            Workouts.Remove(SelectedWorkout);
+            
         }
-        private bool CanShowDetailsOrRemove() => SelectedWorkout != null;
-        private void SignOut()
+    }
+
+    public class WorkoutService
+    {
+        private List<Workout> _workout = new List<Workout>();
+
+        public IEnumerable<Workout> GetWorkouts() => _workout;
+
+        public void AddWorkout(Workout workout)
         {
-            MainWindow LogIn = new MainWindow();
-            LogIn.Show();
+            _workout.Add(workout);
         }
-        private void ShowInfo()
+
+        public void RemoveWorkout(Workout workout)
         {
-            MessageBox.Show("Här kan du lägga till, ändra och ta bort träningspass. Du kan även ändra dina inställningar.");
+            _workout.Remove(workout);
         }
     }
 }
