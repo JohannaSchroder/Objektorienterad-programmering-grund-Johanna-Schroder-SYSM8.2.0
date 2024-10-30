@@ -46,6 +46,7 @@ namespace FIT_TRACK2
         {
             LogInCommand = new RelayCommand(SignIn);
             SignUpCommand = new RelayCommand(OpenRegisterWindow);
+            _userService = new UserService();
         }
         private void SignIn()
         {
@@ -102,6 +103,7 @@ namespace FIT_TRACK2
             if(UserNameTaken(username))
             {
                 MessageBox.Show("Användarnamnet är upptaget!");
+                return;
             }
             var newUser = new User("admin","password","Sweden")
             {

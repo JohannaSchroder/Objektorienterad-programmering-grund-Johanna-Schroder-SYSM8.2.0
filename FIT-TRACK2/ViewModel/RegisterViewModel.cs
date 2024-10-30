@@ -73,18 +73,30 @@ namespace FIT_TRACK2.ViewModel
 
         private void SignUp()
 		{
-            try
-			{ 
-				_userService.RegisterUser(UserNameInput, PasswordInput, ValtLand);
-				MessageBox.Show("Du är nu registrerad. Du kan nu logga in!");
-			}
-			catch (Exception ex)
+			if (string.IsNullOrWhiteSpace(UserNameInput) ||
+				string.IsNullOrWhiteSpace(PasswordInput) ||
+				string.IsNullOrWhiteSpace(ConfirmedPassword) ||
+				string.IsNullOrWhiteSpace(ValtLand))
 			{
-				MessageBox.Show("Något gick fel, försök igen!");
+				MessageBox.Show("Du måste fylla i alla fält!");
+				return;
 			}
-
-			MainWindow mainWindow = new MainWindow();
-			mainWindow.Show();
+			if (PasswordInput != ConfirmedPassword)
+			{
+				MessageBox.Show("Dina lösenord matchar inte");
+				return;
+			}
+			try
+			{
+				_userService.RegisterUser(UserNameInput, PasswordInput, ValtLand);
+				MessageBox.Show("Du är registrerad och kan logga in!");
+				MainWindow mainWindow = new MainWindow();
+				mainWindow.Show();
+            }
+			catch (Exception ex)
+			{ 
+				MessageBox.Show("Gör ett nyt försök, något gick fel!");
+			}
         }
     }
 }
