@@ -39,8 +39,8 @@ namespace FIT_TRACK2
 
         private UserService _userService;//för att komma åt metoderna i klassen UserService
 
-        public RelayCommand LogInCommand { get; set; }
-        public RelayCommand SignUpCommand { get; set; }
+        public RelayCommand LogInCommand { get; }
+        public RelayCommand SignUpCommand { get; }
 
         public LogInViewModel()
         {
@@ -49,11 +49,17 @@ namespace FIT_TRACK2
         }
         private void SignIn()
         {
-            if (_userService.RegistreradeUser(UserNameBox, PasswordBox))
+            if (_userService.loggain(UserNameBox, PasswordBox))
             {
                 WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                 workoutsWindow.Show();
                 Application.Current.MainWindow.Close(); 
+            }
+            if (UserNameBox == "admin" && PasswordBox == "password")
+            { 
+                AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow();
+                addWorkoutWindow.Show();
+                Application.Current.MainWindow.Close();
             }
             else
             {
@@ -75,31 +81,35 @@ namespace FIT_TRACK2
         }
 
     }
+
+
+
     public class UserService//klass för att lägga till nya användare och kontrollera så inte användaren redan finns
     {
-        private List<User> ListaUsers = new List<User>();//en lista
+        private readonly List<User> ListaUsers = new List<User>();//en lista
 
-        public bool RegistreradeUser(string username, string password)
+        public bool loggain(string username, string password)
         {
-            foreach (var user in ListaUsers)
-            {
-                if (user.UserName == username && user.Password == password)
-                {
-                    return true;
-                }
-            }
-            return false;
+            var user = ListaUsers.FirstOrDefault(u => u.UserName.Equals(username, StringComparison.OrdinalIgnoreCase));
+            return user != null && user.Password == password;
+        }
+        public bool UserNameTaken(string username)
+        {
+            return ListaUsers.Exists(user => user.UserName.Equals(username, StringComparison.OrdinalIgnoreCase));
         }
         public void RegisterUser(string username, string password, string country)
         {
-            foreach (var user in ListaUsers)
+            if(UserNameTaken(username))
             {
-                if (user.UserName == username)
-                {
-                    MessageBox.Show("Användarnamnet är upptaget");
-                }
+                MessageBox.Show("Användarnamnet är upptaget!");
             }
-            ListaUsers.Add(new User("admin", "password", "sweden") { UserName = username, Password = password, Country = country });
+            var newUser = new User("admin","password","Sweden")
+            {
+                UserName = username,
+                Password = password,
+                Country = country
+            };
+            ListaUsers.Add(newUser);
         }
     }
 

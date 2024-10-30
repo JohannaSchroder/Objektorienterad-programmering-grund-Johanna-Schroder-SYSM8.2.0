@@ -68,10 +68,12 @@ namespace FIT_TRACK2.ViewModel
             _userService = new UserService();
             SignUpCommand = new RelayCommand(SignUp);
 		}
+        public ObservableCollection<string> Land { get; } = new ObservableCollection<string> { "Sweden", "Denmark", "Norway", "Finland", "Iceland" };
 
-		private void SignUp()
+
+        private void SignUp()
 		{
-			try
+            try
 			{ 
 				_userService.RegisterUser(UserNameInput, PasswordInput, ValtLand);
 				MessageBox.Show("Du är nu registrerad. Du kan nu logga in!");
@@ -83,7 +85,7 @@ namespace FIT_TRACK2.ViewModel
 
 			MainWindow mainWindow = new MainWindow();
 			mainWindow.Show();
-		}
+        }
     }
 }
 

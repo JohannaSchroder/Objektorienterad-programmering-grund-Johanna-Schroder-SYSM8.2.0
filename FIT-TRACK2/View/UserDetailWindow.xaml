@@ -7,6 +7,96 @@
         mc:Ignorable="d"
         Title="UserDetailWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBlock 
+            Text="FIT-TRACKER" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Grid.Row="0" 
+            FontSize="50" 
+            Foreground="#DC143C"/>
+        <TextBlock
+            Text="Välj nytt användarnamn"
+            Grid.Row="1"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom"
+            FontSize="20"/>
+        <TextBox
+            x:Name="UserNameinput" 
+            Text="{Binding NewUserNameInput, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Width="200" Height="30" 
+            Grid.Row="2" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"/>
+        <TextBlock
+            Text="Välj nytt lösenord"
+            Grid.Row="3"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom"
+            FontSize="20"/>
+        <TextBox
+            x:Name="PasswordInput" 
+            Text="{Binding NewPasswordInput, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Width="200" Height="30" 
+            Grid.Row="4" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"/>
+        <TextBlock
+            Text="Bekräfta nytt lösenord"
+            Grid.Row="5"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom"
+            FontSize="20"/>
+        <TextBox
+            x:Name="ConfirmedPassword" 
+            Text="{Binding NewConfirmedPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Width="200" Height="30" 
+            Grid.Row="6" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"/>
+        <TextBlock
+            Text="Välj nytt land"
+            Grid.Row="7"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom"
+            FontSize="20"
+            />
+        <ComboBox
+            x:Name="Land"
+            Grid.Row="8"
+            ItemsSource="{Binding Land}"
+            SelectedItem="{Binding NewValtLand}"
+            Width="200" Height="30"
+            />
+        <Button
+            x:Name="btnUptadeUser"
+            Grid.Row="9"
+            Command="{Binding UptadeUser}"
+            Content="Bekräfta"
+            FontSize="20"
+            Width="100" 
+            Height="30"
+            />
+        <Button
+            x:Name="btnGoBack"
+            Grid.Row="10"
+            Command="{Binding GoBack}"
+            Content="Gå tillbaka"
+            FontSize="20"
+            Width="100" 
+            Height="30"
+            />
     </Grid>
 </Window>
