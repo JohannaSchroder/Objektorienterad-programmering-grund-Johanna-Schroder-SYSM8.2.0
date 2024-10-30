@@ -67,27 +67,27 @@
             Height="50"
             HorizontalAlignment="Right"
             Content="Details" 
-            Command="{Binding ShowDetailsCommand}" />
+            Command="{Binding ShowDetailsCommand}" Margin="0,0,257,10" />
         <Button 
             Grid.Row="4"
             Width="100"
             Height="50"
             HorizontalAlignment="Left"
             Content="Remove" 
-            Command="{Binding RemoveWorkoutCommand}" />
+            Command="{Binding RemoveWorkoutCommand}" Margin="233,0,0,10" />
         <Button 
             Grid.Row="5"
             Width="100"
             Height="50"
-            HorizontalAlignment="Right"
-            Content="Info" 
-            Command="{Binding ShowInfoCommand}" />
+            HorizontalAlignment="Left"
+            Content="FIT-TRACKER Info" 
+            Command="{Binding ShowInfoCommand}" Margin="443,10,0,0" />
         <Button 
             Grid.Row="5"
             Width="100"
             Height="50"
             HorizontalAlignment="Left"
             Content="Sign Out" 
-            Command="{Binding SignOutCommand}" />
+            Command="{Binding SignOutCommand}" Margin="233,10,0,0" />
     </Grid>
 </Window>

@@ -6,7 +6,89 @@
         xmlns:local="clr-namespace:FIT_TRACK2.Windows"
         mc:Ignorable="d"
         Title="WorkoutDetailWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Background="#D3D3D3">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock 
+            Text="FIT-TRACKER" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Grid.Row="0" 
+            FontSize="50" 
+            Foreground="#DC143C"/>
+        <TextBlock 
+            Grid.Row="1"
+            Text="Datum"
+            Width="100" Margin="178,2,522,60" Grid.RowSpan="2"
+            FontSize="20"
+            VerticalAlignment="Center"/>
+        <TextBox
+            Grid.Row="1"
+            Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
+            Width="200"
+            Height="50"/>
+        <TextBlock 
+            Grid.Row="1"
+            Text="Träning"
+            Width="100" Margin="178,62,522,0" Grid.RowSpan="2"
+            FontSize="20"
+            VerticalAlignment="Center"/>
+        <TextBox
+            Grid.Row="2"
+            Text="{Binding WorkoutType, UpdateSourceTrigger=PropertyChanged}"
+            Width="200"
+            Height="50"/>
+        <TextBlock 
+            Grid.Row="2"
+            Text="Varaktighet"
+            Width="100" Margin="178,62,522,0" Grid.RowSpan="2"
+            FontSize="20"
+            VerticalAlignment="Center"/>
+        <TextBox
+            Grid.Row="3"
+            Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"
+            Width="200"
+            Height="50"/>
+        <TextBlock 
+            Grid.Row="3"
+            Text="Calorier"
+            Width="100" Margin="178,62,522,0" Grid.RowSpan="2"
+            FontSize="20"
+            VerticalAlignment="Center"/>
+        <TextBox
+            Grid.Row="4"
+            Text="{Binding Calorier, UpdateSourceTrigger=PropertyChanged}"
+            Width="200"
+            Height="50"/>
+        <TextBlock 
+            Grid.Row="4"
+            Text="Notes"
+            Width="100" Margin="178,62,522,0" Grid.RowSpan="2"
+            FontSize="20"
+            VerticalAlignment="Center"/>
+        <TextBox
+            Grid.Row="5"
+            Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}"
+            Width="200"
+            Height="50"/>
+        <Button
+            Grid.Row="6"
+            Width="100"
+            Height="50" Margin="443,5,257,7"
+            Content="Spara"
+            Command="{Binding SaveCommand}"/>
+        <Button
+            Grid.Row="6"
+            Width="100"
+            Height="50" Margin="257,6,443,6"
+            Content="Ändra"
+            Command="{Binding EditCommand}"/>
     </Grid>
 </Window>
