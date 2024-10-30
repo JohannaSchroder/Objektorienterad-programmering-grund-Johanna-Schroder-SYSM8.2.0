@@ -1,4 +1,5 @@
 ﻿using FIT_TRACK2.Klasser;
+using FIT_TRACK2.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -61,7 +62,7 @@ namespace FIT_TRACK2.ViewModel
 			}
 		}
 		private UserService _userService;
-        public RelayCommand SignUpCommand { get; }
+        public RelayCommand SignUpCommand { get; } 
 
 		public RegisterViewModel()
 		{
@@ -89,13 +90,15 @@ namespace FIT_TRACK2.ViewModel
 			try
 			{
 				_userService.RegisterUser(UserNameInput, PasswordInput, ValtLand);
-				MessageBox.Show("Du är registrerad och kan logga in!");
+				MessageBox.Show($"Du är registrerad {UserNameInput} och kan logga in!");
 				MainWindow mainWindow = new MainWindow();
 				mainWindow.Show();
+                Application.Current.Windows.OfType<RegisterWindow>().First().Close();
             }
-			catch (Exception ex)
+			catch			
 			{ 
-				MessageBox.Show("Gör ett nyt försök, något gick fel!");
+				MessageBox.Show("Gör ett nytt försök, något gick fel!");
+				return;
 			}
         }
     }
