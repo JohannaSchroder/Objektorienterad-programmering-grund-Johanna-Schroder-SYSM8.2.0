@@ -37,10 +37,7 @@ namespace FIT_TRACK2
             }
         }
 
-        private UserService _userService;//för att komma åt metoderna i klassen UserService
-
-        public RelayCommand LogInCommand { get; }
-        public RelayCommand SignUpCommand { get; }
+        private readonly UserService _userService;//för att komma åt metoderna i klassen UserService
 
         public LogInViewModel()
         {
@@ -48,9 +45,11 @@ namespace FIT_TRACK2
             SignUpCommand = new RelayCommand(OpenRegisterWindow);
             _userService = new UserService();
         }
+        public ICommand LogInCommand { get; }
+        public ICommand SignUpCommand { get; }
         private void SignIn()
         {
-            if (_userService.loggain(UserNameBox, PasswordBox))
+            if (_userService.Login(UserNameBox, PasswordBox))
             {
                 WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                 workoutsWindow.Show();

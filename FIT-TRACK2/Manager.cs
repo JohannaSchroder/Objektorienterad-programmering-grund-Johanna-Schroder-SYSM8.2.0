@@ -16,50 +16,32 @@ namespace FIT_TRACK2
     {
         private List<User> ListaUsers = new List<User>();//en lista
 
-        public bool UserNameTaken(string username)
+        public void RegisterUser(User user)
         {
-            foreach (var user in ListaUsers)
+            if (!ListaUsers.Any(u => u.UserName == user.UserName))
             {
-                if (user.UserName.Equals(username, StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
+                ListaUsers.Add(user);
             }
-            return false;
+            else
+            {
+                throw new System.Exception("Användarnamnet är redan upptaget.");
+            }
         }
-        public bool RegisterUser(string username, string password, string country)
-        {
-            if (UserNameTaken(username))
-            {
-                MessageBox.Show("Användarnamnet är upptaget!");
-                return false;
-            }
-
-            var newUser = new User(username, password, country);
-            ListaUsers.Add(newUser);
-            return true;
+        public bool Login(string username, string password)
+        { 
+            return ListaUsers.Any(u => u.UserName == username && u.Password == password); 
         }
 
-        public bool loggain(string username, string password)
-        {
-            foreach (var user in ListaUsers)
-            {
-                if (user.UserName.Equals(username, StringComparison.OrdinalIgnoreCase))
-                {
-                    return user.Password == password;
-                }
-            }
-            return false;
-        }
+
     }
 
 
 
-    internal class WorkoutService
+        internal class WorkoutService
     {
         private List<Workout> _workouts = new List<Workout>();
 
-        public IEnumerable<Workout> GetWorkouts() => _workouts;
+       public IEnumerable<Workout> GetWorkouts() => _workouts;
 
         public void AddWorkout(Workout workout)
         {

@@ -3,10 +3,12 @@ using FIT_TRACK2.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace FIT_TRACK2.ViewModel
 {
@@ -55,47 +57,45 @@ namespace FIT_TRACK2.ViewModel
 				OnPropertyChanged();
 			}
 		}
-		private UserService _userService;
-        public RelayCommand SignUpCommand { get; } 
+		private readonly UserService _userService;
+        public ICommand SignUpCommand { get; } 
 
 		public RegisterViewModel()
 		{
             _userService = new UserService();
             SignUpCommand = new RelayCommand(SignUp);
-		}
+        }
         public ObservableCollection<string> Land { get; } = new ObservableCollection<string> { "Sweden", "Denmark", "Norway", "Finland", "Iceland" };
 
-
-        private void SignUp()
+		private void SignUp()
 		{
+
 			if (string.IsNullOrWhiteSpace(UserNameInput) ||
 				string.IsNullOrWhiteSpace(PasswordInput) ||
 				string.IsNullOrWhiteSpace(ConfirmedPassword) ||
 				string.IsNullOrWhiteSpace(ValtLand))
 			{
-				MessageBox.Show("Du måste fylla i alla fält!");
-				return;
+                MessageBox.Show("Du måste fylla i alla rutor!");
 			}
-			if (PasswordInput != ConfirmedPassword)
+			if (PasswordInput != (ConfirmedPassword))
 			{
-				MessageBox.Show("Dina lösenord matchar inte");
-				return;
+				MessageBox.Show("Lösenorden matchar inte!");
 			}
-            try
-            {
-                if (_userService.RegisterUser(UserNameInput, PasswordInput, ValtLand))
-                {
-                    MessageBox.Show($"Du är registrerad som {UserNameInput} och kan logga in!");
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
-                    Application.Current.Windows.OfType<RegisterWindow>().First().Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ett fel inträffade, försök igen!");
-            }
-        }
+			else
+			{
+				try
+				{
+					_userService.RegisterUser(new User("admin", "password", "Sweden")
+					{ UserName = UserNameInput, Password = PasswordInput, Country = ValtLand });
+					MainWindow mainWindow = new MainWindow();
+					mainWindow.Show();
+				}
+				catch (System.Exception ex)
+				{
+					MessageBox.Show("Något gick fel, försök igen!");
+				}
+			}
+		}
     }
 }
 
