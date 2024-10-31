@@ -53,6 +53,7 @@
             <Button 
             x:Name="LogIn" 
             Command="{Binding LogInCommand}"
+            CommandParameter="{Binding User}"
             Content="Login" 
             Grid.Row="5" 
             Width="100" 

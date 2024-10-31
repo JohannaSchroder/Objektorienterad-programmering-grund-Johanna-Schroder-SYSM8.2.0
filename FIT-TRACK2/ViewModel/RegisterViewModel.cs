@@ -93,7 +93,7 @@ namespace FIT_TRACK2.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ett fel inträffade: {ex.Message}");
+                MessageBox.Show($"Ett fel inträffade, försök igen!");
             }
         }
     }

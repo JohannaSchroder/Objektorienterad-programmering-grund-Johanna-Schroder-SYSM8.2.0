@@ -13,10 +13,6 @@ namespace FIT_TRACK2.ViewModel
 {
     class WorkoutsViewModel : baseViewModel
     {
-        private void OnPropertyChanged()
-        {
-            throw new NotImplementedException();
-        }
 
         private WorkoutService _workoutService;
         private UserService _userService;
@@ -61,25 +57,6 @@ namespace FIT_TRACK2.ViewModel
                 _workoutService.RemoveWorkout(SelectedWorkout);
                 Workouts.Remove(SelectedWorkout);
             }
-        }
-    }
-
-
-
-    internal class WorkoutService
-    {
-        private List<Workout> _workouts = new List<Workout>();
-
-       public IEnumerable<Workout> GetWorkouts() => _workouts;
-
-        public void AddWorkout(Workout workout)
-        {
-            _workouts.Add(workout);
-        }
-
-        public void RemoveWorkout(Workout workout)
-        {
-            _workouts.Remove(workout);
         }
     }
 }
