@@ -17,14 +17,14 @@ namespace FIT_TRACK2
     {
         private string _username;
             public string UserNameBox
-        {
-            get { return _username; }
-            set 
-            { 
+            {
+                get { return _username; }
+                set 
+                { 
                 _username = value;
                 OnPropertyChanged();
+                }
             }
-        }
 
         private string _password;
         public string PasswordBox
@@ -49,7 +49,13 @@ namespace FIT_TRACK2
         public ICommand SignUpCommand { get; }
         private void SignIn()
         {
-            if (_userService.Login(UserNameBox, PasswordBox))
+            if (UserNameBox == "admin" && PasswordBox == "password")
+            {
+                WorkoutsWindow workoutsWindow = new WorkoutsWindow();
+                workoutsWindow.Show();
+                Application.Current.MainWindow.Close();
+            }
+           /* if (_userService.Login(UserNameBox, PasswordBox))
             {
                 WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                 workoutsWindow.Show();
@@ -58,7 +64,7 @@ namespace FIT_TRACK2
             else
             {
                 MessageBox.Show("Fel användarnamn eller lösenord");
-            }
+            }*/
         }
 
 

@@ -14,49 +14,92 @@ namespace FIT_TRACK2.ViewModel
     class WorkoutsViewModel : baseViewModel
     {
 
-        private WorkoutService _workoutService;
-        private UserService _userService;
-        public ObservableCollection<Workout> Workouts { get;set; } = new ObservableCollection<Workout>();
+        private readonly WorkoutService _workoutService;
+        private readonly UserService _userService;
+        public ObservableCollection<Workout> Workouts { get; set; }
 
         private Workout _selectedWorkout;
-        public Workout SelectedWorkout
+        public Workout SelectedWorkouts
         {
             get { return _selectedWorkout; }
             set { _selectedWorkout = value; OnPropertyChanged(); }
         }
 
-        public ICommand AddWorkoutCommand { get; set; }
-        public ICommand RemoveWorkoutCommand { get;set; }
+        private string _user;
 
-        public WorkoutsViewModel(WorkoutService workoutService, UserService userService)
+        public string User
         {
-            _workoutService= workoutService;
-            _userService = new UserService();
-            LoadWorkouts();
-            AddWorkoutCommand = new RelayCommand(AddWorkout);
-            RemoveWorkoutCommand = new RelayCommand(RemoveWorkout);
+            get { return _user; }
+            set { _user = value; OnPropertyChanged(nameof(UserName));}
         }
 
-        private void LoadWorkouts()
+
+        public ICommand AddWorkoutCommand { get; set; }
+        public ICommand RemoveWorkoutCommand { get; set; }
+        public ICommand SignOutCommand { get; }
+        public ICommand ViewDetailsCommand { get; }
+        public ICommand ShowUserCommand { get; }
+        public ICommand ShowInfoCommand { get; }
+
+        public WorkoutsViewModel()
         {
-            var workouts = _workoutService.GetWorkouts();
-            Workouts.Clear();
-            foreach (var workout in workouts)
-            {
-                Workouts.Add(workout);
-            }
+            _workoutService= new WorkoutService();
+            _userService = new UserService();
+            AddWorkoutCommand = new RelayCommand(AddWorkout);
+            RemoveWorkoutCommand = new RelayCommand(RemoveWorkout, CanExecuteWorkoutCommand);
+            ViewDetailsCommand = new RelayCommand(ViewDetails, CanExecuteWorkoutCommand);
+            SignOutCommand = new RelayCommand(SignOut);
+            ShowUserCommand = new RelayCommand(ShowUser);
+            ShowInfoCommand = new RelayCommand(ShowInfo);
+            Workouts = new ObservableCollection<Workout> ();
+        }
+
+        public string UserName => _userService.CurrentUser.UserName;
+
+        public void ShowUser()//här försöker jag skriva ut användarens namn uppe i vänstra hörnet
+        {
+           User = _userService.CurrentUser.UserName;
         }
         private void AddWorkout()
         {
+            AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow(); 
+            addWorkoutWindow.Show();
         }
 
         private void RemoveWorkout()
         {
-            if (SelectedWorkout != null)
-            {
-                _workoutService.RemoveWorkout(SelectedWorkout);
-                Workouts.Remove(SelectedWorkout);
+            if (SelectedWorkouts == null) 
+            { 
+                MessageBox.Show("Markera ett träningspass först."); 
+                return; 
             }
+            Workouts.Remove(SelectedWorkouts);
+        }
+
+        private void ViewDetails()
+        {
+            if (SelectedWorkouts == null) 
+            { 
+                MessageBox.Show("Markera ett träningspass först."); 
+                return; 
+            }
+            WorkoutDetailWindow workoutDetailWindow = new WorkoutDetailWindow(); 
+            workoutDetailWindow.Show();
+        }
+        private bool CanExecuteWorkoutCommand()
+        {
+            return SelectedWorkouts != null;
+        }
+
+        private void ShowInfo()
+        {
+            MessageBox.Show("Här kan du lägga till och ta bort träningspass. Du kan även ändra i dina inställningar");
+        }
+
+        private void SignOut() 
+        {
+            MainWindow mainWindow = new MainWindow(); 
+            mainWindow.Show();
         }
     }
 }
