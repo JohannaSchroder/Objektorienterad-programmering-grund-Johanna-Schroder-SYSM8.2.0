@@ -23,12 +23,6 @@ namespace FIT_TRACK2.ViewModel
 				OnPropertyChanged();
 			}
 		}
-
-		private void OnPropertyChanged()
-		{
-			throw new NotImplementedException();
-		}
-
 		private string _passwordInput;
 		public string PasswordInput
 		{
@@ -87,19 +81,20 @@ namespace FIT_TRACK2.ViewModel
 				MessageBox.Show("Dina lösenord matchar inte");
 				return;
 			}
-			try
-			{
-				_userService.RegisterUser(UserNameInput, PasswordInput, ValtLand);
-				MessageBox.Show($"Du är registrerad {UserNameInput} och kan logga in!");
-				MainWindow mainWindow = new MainWindow();
-				mainWindow.Show();
-                Application.Current.Windows.OfType<RegisterWindow>().First().Close();
+            try
+            {
+                if (_userService.RegisterUser(UserNameInput, PasswordInput, ValtLand))
+                {
+                    MessageBox.Show($"Du är registrerad som {UserNameInput} och kan logga in!");
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    Application.Current.Windows.OfType<RegisterWindow>().First().Close();
+                }
             }
-			catch			
-			{ 
-				MessageBox.Show("Gör ett nytt försök, något gick fel!");
-				return;
-			}
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ett fel inträffade: {ex.Message}");
+            }
         }
     }
 }

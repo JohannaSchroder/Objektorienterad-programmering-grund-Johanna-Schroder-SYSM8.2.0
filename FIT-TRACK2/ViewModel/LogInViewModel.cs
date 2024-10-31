@@ -50,23 +50,11 @@ namespace FIT_TRACK2
         }
         private void SignIn()
         {
-            if (UserNameBox == "viva" && PasswordBox == "hamster")
-            {
-                WorkoutsWindow workoutsWindow = new WorkoutsWindow();
-                workoutsWindow.Show();
-                Application.Current.MainWindow.Close();
-            }
-            /*if (_userService.loggain(UserNameBox, PasswordBox))
+            if (_userService.loggain(UserNameBox, PasswordBox))
             {
                 WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                 workoutsWindow.Show();
                 Application.Current.MainWindow.Close(); 
-            }*/
-            else if (UserNameBox == "admin" && PasswordBox == "password")
-            {
-                AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow();
-                addWorkoutWindow.Show();
-                Application.Current.MainWindow.Close();
             }
             else
             {
@@ -82,49 +70,45 @@ namespace FIT_TRACK2
             Application.Current.MainWindow.Close();
         }
 
-        private void OnPropertyChanged()
-        {
-            throw new NotImplementedException();
-        }
-
     }
-    public class UserService//klass för att lägga till nya användare och kontrollera så inte användaren redan finns
-    {
-        private readonly List<User> ListaUsers = new List<User>();//en lista
 
-        public bool UserNameTaken(string username)
-        {
-            for (int i = 0; i < ListaUsers.Count; i++)
+
+
+    internal class UserService//klass för att lägga till nya användare och kontrollera så inte användaren redan finns
+    {
+        private List<User> ListaUsers = new List<User>();//en lista
+
+            public bool UserNameTaken(string username)
             {
-                if (ListaUsers[i].UserName.Equals(username, StringComparison.OrdinalIgnoreCase))
+                foreach (var user in ListaUsers)
                 {
-                    return true;
+                    if (user.UserName.Equals(username, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
-        }
-        public void RegisterUser(string username, string password, string country)
+        public bool RegisterUser(string username, string password, string country)
         {
             if (UserNameTaken(username))
             {
                 MessageBox.Show("Användarnamnet är upptaget!");
-                return;
+                return false;
             }
-            var newUser = new User("admin", "password", "Sweden")
-            {
-                UserName = username,
-                Password = password,
-                Country = country
-            };
+
+            var newUser = new User(username, password, country);
             ListaUsers.Add(newUser);
+            return true;
         }
+
         public bool loggain(string username, string password)
         {
-            for (int i = 0; i < ListaUsers.Count; i++)
+            foreach (var user in ListaUsers)
             {
-                if (ListaUsers[i].UserName.Equals(username, StringComparison.OrdinalIgnoreCase))
+                if (user.UserName.Equals(username, StringComparison.OrdinalIgnoreCase))
                 {
-                    return ListaUsers[i].Password == password;
+                    return user.Password == password;
                 }
             }
             return false;

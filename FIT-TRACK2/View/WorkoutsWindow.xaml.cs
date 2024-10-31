@@ -25,7 +25,6 @@ namespace FIT_TRACK2.Windows
         public WorkoutsWindow()
         {
             InitializeComponent();
-            this.DataContext = new WorkoutsViewModel();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

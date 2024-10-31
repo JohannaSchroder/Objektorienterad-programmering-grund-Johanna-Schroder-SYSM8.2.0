@@ -31,7 +31,7 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="1"
-            Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding NewWorkout.Date, UpdateSourceTrigger=PropertyChanged}"
             Width="200"
             Height="50"/>
         <TextBlock 
@@ -42,7 +42,7 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="2"
-            Text="{Binding WorkoutType, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding NewWorkout.WorkoutType, UpdateSourceTrigger=PropertyChanged}"
             Width="200"
             Height="50"/>
         <TextBlock 
@@ -53,7 +53,7 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="3"
-            Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding NewWorkout.Duration, UpdateSourceTrigger=PropertyChanged}"
             Width="200"
             Height="50"/>
         <TextBlock 
@@ -64,7 +64,7 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="4"
-            Text="{Binding Calorier, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding NewWorkout.Calorier, UpdateSourceTrigger=PropertyChanged}"
             Width="200"
             Height="50"/>
         <TextBlock 
@@ -75,7 +75,7 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="5"
-            Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding NewWorkout.Notes, UpdateSourceTrigger=PropertyChanged}"
             Width="200"
             Height="50"/>
         <Button
