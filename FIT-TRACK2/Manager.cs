@@ -14,6 +14,25 @@ namespace FIT_TRACK2
 
     internal class UserService//klass för att lägga till nya användare och kontrollera så inte användaren redan finns
     {
+        private static UserService _instance;
+        private static readonly object _lock = new object();
+        private UserService()
+        { }
+        public static UserService Instance
+        {
+            get
+            {
+                lock (_lock)
+                {
+                    if (_instance == null)
+                    {
+                        _instance = new UserService();
+                    }
+                    return _instance;
+                }
+            }
+        }
+
         private List<User> ListaUsers = new List<User>();//en lista för att lagra användare
         public User CurrentUser { get; private set; }//egenskap för att hämta inloggad användare
 

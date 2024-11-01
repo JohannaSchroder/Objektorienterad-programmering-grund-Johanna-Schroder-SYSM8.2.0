@@ -16,13 +16,12 @@ namespace FIT_TRACK2.ViewModel
 
         private readonly WorkoutService _workoutService;
         private readonly UserService _userService;
-        public ObservableCollection<Workout> Workouts { get; set; }
 
-        private Workout _selectedWorkout;
-        public Workout SelectedWorkouts
+        private string _selectedWorkout;
+        public string SelectedWorkouts
         {
             get { return _selectedWorkout; }
-            set { _selectedWorkout = value; OnPropertyChanged(); }
+            set { _selectedWorkout = value; OnPropertyChanged(nameof(SelectedWorkouts)); }
         }
 
         private string _user;
@@ -44,15 +43,16 @@ namespace FIT_TRACK2.ViewModel
         public WorkoutsViewModel()
         {
             _workoutService= new WorkoutService();
-            _userService = new UserService();
+            _userService = UserService.Instance;
             AddWorkoutCommand = new RelayCommand(AddWorkout);
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkout, CanExecuteWorkoutCommand);
             ViewDetailsCommand = new RelayCommand(ViewDetails, CanExecuteWorkoutCommand);
             SignOutCommand = new RelayCommand(SignOut);
             ShowUserCommand = new RelayCommand(ShowUser);
             ShowInfoCommand = new RelayCommand(ShowInfo);
-            Workouts = new ObservableCollection<Workout> ();
+            
         }
+        public ObservableCollection<string> Workouts { get; set; } = new ObservableCollection<string> { "Cardio Workout","Strength Workout"};
 
         public string UserName => _userService.CurrentUser.UserName;
 
@@ -62,8 +62,7 @@ namespace FIT_TRACK2.ViewModel
         }
         private void AddWorkout()
         {
-            AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow(); 
-            addWorkoutWindow.Show();
+            Workouts.Add(SelectedWorkouts);           
         }
 
         private void RemoveWorkout()

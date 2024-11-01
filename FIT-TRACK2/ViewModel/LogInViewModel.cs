@@ -43,19 +43,19 @@ namespace FIT_TRACK2
         {
             LogInCommand = new RelayCommand(SignIn);
             SignUpCommand = new RelayCommand(OpenRegisterWindow);
-            _userService = new UserService();
+            _userService = UserService.Instance;
         }
         public ICommand LogInCommand { get; }
         public ICommand SignUpCommand { get; }
         private void SignIn()
         {
-            if (UserNameBox == "admin" && PasswordBox == "password")
+            /*if (UserNameBox == "admin" && PasswordBox == "password")
             {
                 WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                 workoutsWindow.Show();
                 Application.Current.MainWindow.Close();
-            }
-           /* if (_userService.Login(UserNameBox, PasswordBox))
+            }*/
+           if (_userService.Login(UserNameBox, PasswordBox))
             {
                 WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                 workoutsWindow.Show();
@@ -64,7 +64,7 @@ namespace FIT_TRACK2
             else
             {
                 MessageBox.Show("Fel användarnamn eller lösenord");
-            }*/
+            }
         }
 
 

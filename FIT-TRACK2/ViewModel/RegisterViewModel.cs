@@ -62,7 +62,7 @@ namespace FIT_TRACK2.ViewModel
 
 		public RegisterViewModel()
 		{
-            _userService = new UserService();
+            _userService = UserService.Instance;
             SignUpCommand = new RelayCommand(SignUp);
         }
         public ObservableCollection<string> Land { get; } = new ObservableCollection<string> { "Sweden", "Denmark", "Norway", "Finland", "Iceland" };
