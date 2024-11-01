@@ -12,22 +12,20 @@ namespace FIT_TRACK2.ViewModel
     
     class AddWorkoutViewModel : baseViewModel
     {
-        private void OnPropertyChanged()
-        {
-            throw new NotImplementedException();
-        }
 
-        public WorkoutService _workoutService;
-        public Workout NewWorkout { get; set; }
+        public WorkoutService _workoutService;//hämtar WorkoutService
+
+        public Workout NewWorkout { get; set; }//egenskap för att det nya träningspasset som ska läggas till
 
 
-            public ICommand SaveCommand { get; set; }
+            public ICommand SaveCommand { get; set; }//kommando för att spara det nya träningspasset
         public AddWorkoutViewModel()
         {
-
+            _workoutService = new WorkoutService();
+            SaveCommand = new RelayCommand(Save);
         }
 
-        private void Save()
+        private void Save()//en metod för att spara träningspass
         {
 
         }
