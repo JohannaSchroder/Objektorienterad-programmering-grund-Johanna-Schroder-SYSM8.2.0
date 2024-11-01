@@ -18,10 +18,10 @@ namespace FIT_TRACK2.ViewModel
         public Workout NewWorkout { get; set; }//egenskap för att det nya träningspasset som ska läggas till
 
 
-            public ICommand SaveCommand { get; set; }//kommando för att spara det nya träningspasset
+        public ICommand SaveCommand { get; set; }//kommando för att spara det nya träningspasset
         public AddWorkoutViewModel()
         {
-            _workoutService = new WorkoutService();
+            _workoutService = WorkoutService.Instance;
             SaveCommand = new RelayCommand(Save);
         }
 

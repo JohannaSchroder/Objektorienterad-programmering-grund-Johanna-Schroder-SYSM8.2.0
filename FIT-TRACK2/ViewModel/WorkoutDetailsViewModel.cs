@@ -11,11 +11,6 @@ namespace FIT_TRACK2.ViewModel
 {
     class WorkoutDetailsViewModel : baseViewModel    
     {
-        private void OnPropertyChanged()
-        {
-            throw new NotImplementedException();
-        }
-
         public DateTime Date
         {
             get => _workout.Date; 

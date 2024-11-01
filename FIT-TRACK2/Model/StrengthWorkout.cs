@@ -13,7 +13,12 @@ namespace FIT_TRACK2.Klasser
         //konstruktor
         public StrengthWorkout(DateTime Date, string Type, TimeSpan Duration, int CaloriesBurned, string Notes, int Distance) 
             : base(Date, Type, Duration, CaloriesBurned, Notes)
-        { 
+        {
+            this.Date = Date;
+            this.Type = Type;
+            this.Duration = Duration;
+            this.CaloriesBurned = CaloriesBurned;
+            this.Notes = Notes;
             this.Duration = Duration;
         }
         //metoder

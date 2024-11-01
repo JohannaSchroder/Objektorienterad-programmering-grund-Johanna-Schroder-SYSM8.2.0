@@ -65,7 +65,26 @@ namespace FIT_TRACK2
 
         internal class WorkoutService
         {
-            private List<Workout> _workouts = new List<Workout>(); //lista som sparar träningspass
+        private static WorkoutService _instance;
+        private static readonly object _lock = new object();
+        private WorkoutService()
+        { }
+        public static WorkoutService Instance
+        {
+            get
+            {
+                lock (_lock)
+                {
+                    if (_instance == null)
+                    {
+                        _instance = new WorkoutService();
+                    }
+                    return _instance;
+                }
+            }
+        }
+
+        private List<Workout> _workouts = new List<Workout>(); //lista som sparar träningspass
             public void AddWorkout(Workout workout) //medtod för att lägga till nytt träningspass
             { 
                 _workouts.Add(workout); 

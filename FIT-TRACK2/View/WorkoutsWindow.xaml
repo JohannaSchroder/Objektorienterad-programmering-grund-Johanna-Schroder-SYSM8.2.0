@@ -24,12 +24,12 @@
             FontSize="50" 
             Foreground="#DC143C"/>
         <TextBlock 
-            Text="{Binding ShowUserCommand}"
+            Text="{Binding UserName}"
             x:Name="User"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Width="150"
-            Height="30"/>
+            Height="30" Margin="31,20,0,0"/>
         <Button 
             Width="100"
             Height="50"
@@ -48,11 +48,15 @@
             Height="50"
             x:Name="ComboboxWorkouts"
             ItemsSource="{Binding Workouts}" 
+            SelectedItem="{Binding SelectedWorkout}"
+            DisplayMemberPath="Type"
              HorizontalAlignment="Center" Margin="0,5,0,5" Grid.Row="1"/>
         
         <ListBox
             x:Name="ListboxSelected"
-            SelectedItem="{Binding SelectedWorkouts}"
+            ItemsSource="{Binding SelectedWorkouts}" 
+            SelectedItem="{Binding SelectedWorkout}"
+            DisplayMemberPath="Type"
             Width="200" Height="100" Margin="300,0,300,20" Grid.RowSpan="2" Grid.Row="3"/>
 
         <Button 

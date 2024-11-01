@@ -17,67 +17,68 @@ namespace FIT_TRACK2.ViewModel
         private readonly WorkoutService _workoutService;
         private readonly UserService _userService;
 
-        private string _selectedWorkout;
-        public string SelectedWorkouts
+        private Workout _selectedWorkout;
+        public Workout SelectedWorkout
         {
             get { return _selectedWorkout; }
-            set { _selectedWorkout = value; OnPropertyChanged(nameof(SelectedWorkouts)); }
+            set { _selectedWorkout = value; OnPropertyChanged(); }
         }
 
-        private string _user;
-
-        public string User
+        private string _username;
+        public string UserName
         {
-            get { return _user; }
-            set { _user = value; OnPropertyChanged(nameof(UserName));}
+            get { return _username; }
+            set { _username = value; OnPropertyChanged(nameof(UserName));}
         }
 
 
-        public ICommand AddWorkoutCommand { get; set; }
+        public ICommand AddWorkoutCommand { get; }
         public ICommand RemoveWorkoutCommand { get; set; }
         public ICommand SignOutCommand { get; }
-        public ICommand ViewDetailsCommand { get; }
+        public ICommand ShowDetailsCommand { get; }
         public ICommand ShowUserCommand { get; }
         public ICommand ShowInfoCommand { get; }
 
         public WorkoutsViewModel()
         {
-            _workoutService= new WorkoutService();
+            _workoutService= WorkoutService.Instance;
             _userService = UserService.Instance;
+            UserName = _userService.CurrentUser.UserName;
             AddWorkoutCommand = new RelayCommand(AddWorkout);
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkout, CanExecuteWorkoutCommand);
-            ViewDetailsCommand = new RelayCommand(ViewDetails, CanExecuteWorkoutCommand);
+            ShowDetailsCommand = new RelayCommand(ViewDetails, CanExecuteWorkoutCommand);
             SignOutCommand = new RelayCommand(SignOut);
-            ShowUserCommand = new RelayCommand(ShowUser);
             ShowInfoCommand = new RelayCommand(ShowInfo);
-            
+            Workouts = new ObservableCollection<Workout>
+            {
+                cardio, strength                
+            };
+            SelectedWorkouts = new ObservableCollection<Workout>();
         }
-        public ObservableCollection<string> Workouts { get; set; } = new ObservableCollection<string> { "Cardio Workout","Strength Workout"};
+        CardioWorkout cardio = new CardioWorkout(DateTime.Today, "Cardio", TimeSpan.Zero, 200, "Cardio träning", 5);
+        StrengthWorkout strength = new StrengthWorkout(DateTime.Today, "Strength", TimeSpan.Zero, 200, "Strength träning", 1000);
+        public ObservableCollection<Workout> Workouts { get; set; }
+        public ObservableCollection<Workout> SelectedWorkouts { get; set; }
 
-        public string UserName => _userService.CurrentUser.UserName;
-
-        public void ShowUser()//här försöker jag skriva ut användarens namn uppe i vänstra hörnet
-        {
-           User = _userService.CurrentUser.UserName;
-        }
         private void AddWorkout()
         {
-            Workouts.Add(SelectedWorkouts);           
+            if (SelectedWorkout != null && !SelectedWorkouts.Contains(SelectedWorkout)) 
+            { SelectedWorkouts.Add(SelectedWorkout); }
         }
 
-        private void RemoveWorkout()
+        private void RemoveWorkout()//ta bort tränings pass i listan
         {
-            if (SelectedWorkouts == null) 
+            if (SelectedWorkout == null) 
             { 
                 MessageBox.Show("Markera ett träningspass först."); 
                 return; 
             }
-            Workouts.Remove(SelectedWorkouts);
+            SelectedWorkouts.Remove(SelectedWorkout);
         }
 
         private void ViewDetails()
         {
-            if (SelectedWorkouts == null) 
+            if (SelectedWorkout == null) 
             { 
                 MessageBox.Show("Markera ett träningspass först."); 
                 return; 

@@ -49,12 +49,12 @@ namespace FIT_TRACK2
         public ICommand SignUpCommand { get; }
         private void SignIn()
         {
-            /*if (UserNameBox == "admin" && PasswordBox == "password")
+            if (UserNameBox == "admin" && PasswordBox == "password")
             {
                 WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                 workoutsWindow.Show();
                 Application.Current.MainWindow.Close();
-            }*/
+            }
            if (_userService.Login(UserNameBox, PasswordBox))
             {
                 WorkoutsWindow workoutsWindow = new WorkoutsWindow();
