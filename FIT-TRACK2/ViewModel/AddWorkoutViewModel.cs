@@ -20,6 +20,8 @@ namespace FIT_TRACK2.ViewModel
 
         public ICommand SaveCommand { get; set; }//kommando 
         public ICommand GoBackCommand { get; set; }
+        
+        //konstruktor
         public AddWorkoutViewModel()
         {
             _workoutService = WorkoutService.Instance;

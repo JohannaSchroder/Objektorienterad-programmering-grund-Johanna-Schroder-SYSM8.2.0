@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace FIT_TRACK2.ViewModel
@@ -56,9 +57,31 @@ namespace FIT_TRACK2.ViewModel
 			GoBackCommand = new RelayCommand(GoBack);
         }
 
-		private void Spara()//metod för att spara ntt användarnamn och läsenord
-		{ 
-			
+		private void Spara()//metod för att spara ntt användarnamn och lösenord
+		{
+            if (NewPasswordInput.Length < 5) 
+			{ 
+				MessageBox.Show("Ditt lösenord måste innehålla minst 5 tecken"); 
+				return; 
+			}
+            if (NewPasswordInput != NewConfirmedPassword) 
+			{ 
+				MessageBox.Show("Lösenorden matchar inte"); 
+				return; 
+			}
+            if (string.IsNullOrEmpty(NewUserNameInput) || NewUserNameInput.Length < 3) 
+			{ 
+				MessageBox.Show("Ditt användarnamn måste innehålla minst 3 tecken"); 
+				return; 
+			}
+            if (_userService.UsernameExists(NewUserNameInput)) 
+			{ 
+				MessageBox.Show("Användarnamnet är redan upptaget."); 
+				return; 
+			}
+            _userService.CurrentUser.Password = NewPasswordInput;
+        
+			_userService.CurrentUser.UserName = NewUserNameInput; _userService.CurrentUser.Country = NewValtLand;
 		}
 
 		private void GoBack()//metod för att gå tillbaka

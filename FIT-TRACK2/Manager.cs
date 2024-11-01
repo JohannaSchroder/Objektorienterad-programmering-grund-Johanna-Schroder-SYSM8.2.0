@@ -36,6 +36,10 @@ namespace FIT_TRACK2
         private List<User> ListaUsers = new List<User>();//en lista för att lagra användare
         public User CurrentUser { get; private set; }//egenskap för att hämta inloggad användare
 
+        public bool UsernameExists(string username) //metod för att kolla om användaren redan finns
+        { 
+            return ListaUsers.Any(u => u.UserName.Equals(username, StringComparison.OrdinalIgnoreCase)); 
+        }
         public void RegisterUser(User user)//metod för att registrera en användare
         {
             if (!ListaUsers.Any(u => u.UserName == user.UserName))//kollar om användaren finns i listan
