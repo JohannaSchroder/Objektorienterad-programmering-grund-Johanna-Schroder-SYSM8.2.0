@@ -14,7 +14,7 @@ namespace FIT_TRACK2.ViewModel
 {
 	class RegisterViewModel : baseViewModel
 	{
-
+		//egenskaper
 		private string _userNameInput;
 		public string UserNameInput
 		{
@@ -60,14 +60,15 @@ namespace FIT_TRACK2.ViewModel
 		private readonly UserService _userService;
         public ICommand SignUpCommand { get; } 
 
+		//konstruktor
 		public RegisterViewModel()
 		{
             _userService = UserService.Instance;
             SignUpCommand = new RelayCommand(SignUp);
         }
         public ObservableCollection<string> Land { get; } = new ObservableCollection<string> { "Sweden", "Denmark", "Norway", "Finland", "Iceland" };
-
-		private void SignUp()
+		//lista med länder
+		private void SignUp()//metod för att registrera sig
 		{
 
 			if (string.IsNullOrWhiteSpace(UserNameInput) ||

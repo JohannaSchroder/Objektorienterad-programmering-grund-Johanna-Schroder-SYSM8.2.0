@@ -18,9 +18,11 @@ namespace FIT_TRACK2.Klasser
             this.Repetations = Repetations;
         }
         //metoder
-        public override int CalculateCaloriesBurned()
+        public override int CalculateCaloriesBurned()//räkna ut kalorier
         {
-            throw new NotImplementedException();
+            CaloriesBurned = 8; 
+            int reps = Repetations; 
+            return CaloriesBurned * reps;
         }
     }
 }

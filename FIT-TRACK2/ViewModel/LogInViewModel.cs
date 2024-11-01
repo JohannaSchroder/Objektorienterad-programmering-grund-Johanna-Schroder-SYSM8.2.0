@@ -15,6 +15,7 @@ namespace FIT_TRACK2
 {
     class LogInViewModel : baseViewModel//har gjort en klass så jag ska slippa lägga in Inotify..
     {
+        //egenskaper
         private string _username;
             public string UserNameBox
             {
@@ -39,36 +40,37 @@ namespace FIT_TRACK2
 
         private readonly UserService _userService;//för att komma åt metoderna i klassen UserService
 
+        //konstruktor
         public LogInViewModel()
         {
             LogInCommand = new RelayCommand(SignIn);
             SignUpCommand = new RelayCommand(OpenRegisterWindow);
             _userService = UserService.Instance;
         }
+
+        //kommandon
         public ICommand LogInCommand { get; }
         public ICommand SignUpCommand { get; }
-        private void SignIn()
+        private void SignIn()//metod för att logga in
         {
-            if (UserNameBox == "admin" && PasswordBox == "password")
+            /*if (UserNameBox == "admin" && PasswordBox == "password")
             {
                 WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                 workoutsWindow.Show();
                 Application.Current.MainWindow.Close();
-            }
+            }*/
            if (_userService.Login(UserNameBox, PasswordBox))
-            {
+           {
                 WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                 workoutsWindow.Show();
                 Application.Current.MainWindow.Close(); 
-            }
+           }
             else
             {
                 MessageBox.Show("Fel användarnamn eller lösenord");
             }
         }
-
-
-        public void OpenRegisterWindow()
+        public void OpenRegisterWindow()//metod för att öppna registreringsfönster
         { 
             RegisterWindow registerWindow = new RegisterWindow();
             registerWindow.Show();

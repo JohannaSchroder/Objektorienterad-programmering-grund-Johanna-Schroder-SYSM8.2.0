@@ -14,17 +14,14 @@ namespace FIT_TRACK2.Klasser
         public StrengthWorkout(DateTime Date, string Type, TimeSpan Duration, int CaloriesBurned, string Notes, int Distance) 
             : base(Date, Type, Duration, CaloriesBurned, Notes)
         {
-            this.Date = Date;
-            this.Type = Type;
-            this.Duration = Duration;
-            this.CaloriesBurned = CaloriesBurned;
-            this.Notes = Notes;
-            this.Duration = Duration;
+            this.Distance = Distance;
         }
         //metoder
-        public override int CalculateCaloriesBurned()
+        public override int CalculateCaloriesBurned()//metod för att räkna ut kalorier
         {
-            throw new NotImplementedException();
+            CaloriesBurned = 6;
+            int distance = Distance;
+            return CaloriesBurned * distance;
         }
     }
 }

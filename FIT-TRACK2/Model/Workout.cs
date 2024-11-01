@@ -27,7 +27,7 @@ namespace FIT_TRACK2.Klasser
         }
 
 
-        //Metoder
+        //abstrakt metod som måste användas i de klasser som ärver här i från.
         public abstract int CalculateCaloriesBurned();
     }
 }

@@ -11,6 +11,7 @@ namespace FIT_TRACK2.ViewModel
 {
     class WorkoutDetailsViewModel : baseViewModel    
     {
+        //egenskaper
         public DateTime Date
         {
             get => _workout.Date; 
@@ -59,7 +60,6 @@ namespace FIT_TRACK2.ViewModel
                 OnPropertyChanged();
             }
         }
-        private WorkoutService _workoutService;
 
         private Workout _workout;
         public WorkoutDetailsViewModel(Workout workout)
@@ -67,6 +67,9 @@ namespace FIT_TRACK2.ViewModel
             _workout = workout;
         }
 
+        private WorkoutService _workoutService;//hämtar WorkoutService
+
+        //konstruktor
         public WorkoutDetailsViewModel()
         {
 

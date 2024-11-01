@@ -14,7 +14,7 @@ namespace FIT_TRACK2
 
     internal class UserService//klass för att lägga till nya användare och kontrollera så inte användaren redan finns
     {
-        private static UserService _instance;
+        private static UserService _instance;//Singleton
         private static readonly object _lock = new object();
         private UserService()
         { }
@@ -65,7 +65,7 @@ namespace FIT_TRACK2
 
         internal class WorkoutService
         {
-        private static WorkoutService _instance;
+        private static WorkoutService _instance;//Singleton
         private static readonly object _lock = new object();
         private WorkoutService()
         { }
