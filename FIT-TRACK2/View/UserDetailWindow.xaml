@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FIT_TRACK2.Windows"
         mc:Ignorable="d"
         Title="UserDetailWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="#D3D3D3">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="40"/>
@@ -83,7 +83,7 @@
         <Button
             x:Name="btnUptadeUser"
             Grid.Row="9"
-            Command="{Binding UptadeUser}"
+            Command="{Binding UptadeUserCommand}"
             Content="Bekräfta"
             FontSize="20"
             Width="100" 
@@ -92,7 +92,7 @@
         <Button
             x:Name="btnGoBack"
             Grid.Row="10"
-            Command="{Binding GoBack}"
+            Command="{Binding GoBackCommand}"
             Content="Gå tillbaka"
             FontSize="20"
             Width="100" 

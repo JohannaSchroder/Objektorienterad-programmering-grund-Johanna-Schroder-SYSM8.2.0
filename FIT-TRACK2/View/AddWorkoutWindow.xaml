@@ -81,13 +81,19 @@
         <Button
             Grid.Row="6"
             Width="100"
-            Height="50" Margin="443,5,257,7"
+            Height="50" Margin="505,5,195,7"
             Content="Spara"
             Command="{Binding SaveCommand}"/>
+        <Button 
+             Grid.Row="6"
+            Width="100"
+            Height="50" Margin="350,5,350,7"
+            Content="Tillbaka"
+            Command="{Binding GoBackCommand}"/>
         <Button
             Grid.Row="6"
             Width="100"
-            Height="50" Margin="257,6,443,6"
+            Height="50" Margin="196,5,504,7"
             Content="Ändra"
             Command="{Binding EditCommand}"/>
     </Grid>
