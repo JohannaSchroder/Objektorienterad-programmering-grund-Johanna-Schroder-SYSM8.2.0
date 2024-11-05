@@ -46,7 +46,7 @@ namespace FIT_TRACK2.ViewModel
         {
             _workoutService= WorkoutService.Instance; //hämta instansen av WorkoutService och UserService
             _userService = UserService.Instance;
-            UserName = _userService.CurrentUser.UserName;// hämtar användarnamnet för den inloggade användaren
+            UserName = _userService.CurrentUser?.UserName;// hämtar användarnamnet för den inloggade användaren
             AddWorkoutCommand = new RelayCommand(AddWorkout);//bindning till metoder
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkout, CanExecuteWorkoutCommand);
             ShowDetailsCommand = new RelayCommand(ViewDetails, CanExecuteWorkoutCommand);

@@ -1,6 +1,7 @@
 ﻿using FIT_TRACK2.Klasser;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,16 @@ namespace FIT_TRACK2
     {
         private static UserService _instance;//Singleton
         private static readonly object _lock = new object();
+
+        private List<User> ListaUsers;//en lista för att lagra användare
+        
+        public User CurrentUser { get; set; }//egenskap för att hämta inloggad användare
+
         private UserService()
-        { }
+        {
+            ListaUsers = new List<User>();
+            ListaUsers.Add(new User ("admin", "password", "Sweden"));//en sparad användare från start
+        }
         public static UserService Instance
         {
             get
@@ -32,10 +41,6 @@ namespace FIT_TRACK2
                 }
             }
         }
-
-        private List<User> ListaUsers = new List<User>();//en lista för att lagra användare
-        public User CurrentUser { get; private set; }//egenskap för att hämta inloggad användare
-
         public bool UsernameExists(string username) //metod för att kolla om användaren redan finns
         { 
             return ListaUsers.Any(u => u.UserName.Equals(username, StringComparison.OrdinalIgnoreCase)); 
