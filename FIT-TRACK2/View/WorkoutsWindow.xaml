@@ -37,10 +37,10 @@
             Content="Inställningar" 
             Command="{Binding OpenUserDetailWindow}" Margin="10,10,690,0" Grid.Row="5"/>
         <Button
-          Margin="325,5,325,5"      Height="50"
-            Width="150"
+          Margin="300,5,300,5"      Height="50"
+            Width="200"
             x:Name="btnAddWorkout"
-            Content="Lägg till Träningspass"
+            Content="Lägg till Träningspass i listan"
             Command="{Binding AddWorkoutCommand }" Grid.Row="2"/>
 
         <ComboBox 
@@ -51,26 +51,33 @@
             SelectedItem="{Binding SelectedWorkout}"
             DisplayMemberPath="Type"
              HorizontalAlignment="Center" Margin="0,5,0,5" Grid.Row="1"/>
-        
+
         <ListBox
             x:Name="ListboxSelected"
             ItemsSource="{Binding SelectedWorkouts}" 
             SelectedItem="{Binding SelectedWorkout}"
             DisplayMemberPath="Type"
-            Width="200" Height="100" Margin="300,0,300,20" Grid.RowSpan="2" Grid.Row="3"/>
+            Width="200" Margin="300,0,300,0" Grid.Row="3"/>
+
+        <Button 
+            Width="200"
+            Height="50"
+            HorizontalAlignment="Center"
+            Content="Lägg till nytt träningspass" 
+            Command="{Binding OpenAddWorkoutCommand}" Margin="0,10,0,0" Grid.Row="4" />
 
         <Button 
             Width="100"
             Height="50"
             HorizontalAlignment="Left"
             Content="Details" 
-            Command="{Binding ShowDetailsCommand}" Margin="535,0,0,10" Grid.Row="4" />
+            Command="{Binding ShowDetailsCommand}" Margin="532,5,0,5" Grid.Row="3" />
         <Button 
             Width="100"
             Height="50"
             HorizontalAlignment="Left"
             Content="Remove" 
-            Command="{Binding RemoveWorkoutCommand}" Margin="176,0,0,10" Grid.Row="4" />
+            Command="{Binding RemoveWorkoutCommand}" Margin="174,5,0,5" Grid.Row="3" />
         <Button 
             Width="100"
             Height="50"

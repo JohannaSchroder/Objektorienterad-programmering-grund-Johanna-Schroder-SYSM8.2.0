@@ -31,7 +31,8 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="1"
-            Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Date, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            IsReadOnly="{Binding _edit, Converter={StaticResource InverseBooleanConverter}}"
             Width="200"
             Height="50"/>
         <TextBlock 
@@ -42,7 +43,8 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="2"
-            Text="{Binding WorkoutType, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding WorkoutType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            IsReadOnly="{Binding _edit, Converter={StaticResource InverseBooleanConverter}}"
             Width="200"
             Height="50"/>
         <TextBlock 
@@ -53,7 +55,8 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="3"
-            Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            IsReadOnly="{Binding _edit, Converter={StaticResource InverseBooleanConverter}}"
             Width="200"
             Height="50"/>
         <TextBlock 
@@ -64,7 +67,8 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="4"
-            Text="{Binding CaloriesBurned, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding CaloriesBurned, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            IsReadOnly="{Binding _edit, Converter={StaticResource InverseBooleanConverter}}"
             Width="200"
             Height="50"/>
         <TextBlock 
@@ -75,20 +79,27 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="5"
-            Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            IsReadOnly="{Binding _edit, Converter={StaticResource InverseBooleanConverter}}"
             Width="200"
             Height="50"/>
         <Button
             Grid.Row="6"
             Width="100"
-            Height="50" Margin="443,5,257,7"
+            Height="50" Margin="470,6,230,6"
             Content="Spara"
             Command="{Binding SaveCommand}"/>
         <Button
             Grid.Row="6"
             Width="100"
-            Height="50" Margin="257,6,443,6"
+            Height="50" Margin="228,6,472,6"
             Content="Ändra"
             Command="{Binding EditCommand}"/>
+        <Button
+            Grid.Row="6"
+            Width="100"
+            Height="50" Margin="343,6,357,6"
+            Content="Tillbaka"
+            Command="{Binding GoBackCommand}"/>
     </Grid>
 </Window>

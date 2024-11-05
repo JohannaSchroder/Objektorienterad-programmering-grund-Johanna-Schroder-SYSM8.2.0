@@ -29,7 +29,7 @@ namespace FIT_TRACK2.ViewModel
         public string UserName
         {
             get { return _username; }
-            set { _username = value; OnPropertyChanged(nameof(UserName));}
+            set { _username = value; OnPropertyChanged(nameof(UserName)); }
         }
 
         //Kommandon
@@ -40,11 +40,13 @@ namespace FIT_TRACK2.ViewModel
         public ICommand ShowUserCommand { get; }
         public ICommand ShowInfoCommand { get; }
         public ICommand OpenUserDetailWindow { get; }
+        public ICommand OpenAddWorkoutCommand { get; }
+
 
         //konstruktor
         public WorkoutsViewModel()
         {
-            _workoutService= WorkoutService.Instance; //hämta instansen av WorkoutService och UserService
+            _workoutService = WorkoutService.Instance; //hämta instansen av WorkoutService och UserService
             _userService = UserService.Instance;
             UserName = _userService.CurrentUser?.UserName;// hämtar användarnamnet för den inloggade användaren
             AddWorkoutCommand = new RelayCommand(AddWorkout);//bindning till metoder
@@ -53,22 +55,24 @@ namespace FIT_TRACK2.ViewModel
             SignOutCommand = new RelayCommand(SignOut);
             ShowInfoCommand = new RelayCommand(ShowInfo);
             OpenUserDetailWindow = new RelayCommand(OpenUserDetail);
-            Workouts = new ObservableCollection<Workout>//lista med workouts
-            {
-                cardio, strength                
-            };
+            OpenAddWorkoutCommand = new RelayCommand(OpenAddWorkout);
+            Workouts = new ObservableCollection<Workout>(_workoutService.GetWorkouts());//lista med workouts
             SelectedWorkouts = new ObservableCollection<Workout>();
         }
-        CardioWorkout cardio = new CardioWorkout(DateTime.Today, "Cardio", TimeSpan.Zero, 200, "Cardio träning", 5);
-        StrengthWorkout strength = new StrengthWorkout(DateTime.Today, "Strength", TimeSpan.Zero, 200, "Strength träning", 1000);
-        
+
+
         public ObservableCollection<Workout> Workouts { get; set; }//listor
         public ObservableCollection<Workout> SelectedWorkouts { get; set; }
 
+        private void OpenAddWorkout()//metod som öppnar AddworkoutWindow
+        { 
+            AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow();
+            addWorkoutWindow.Show();
+        }
         private void AddWorkout()//metod för att lägga till träningspass i listan
         {
             if (SelectedWorkout != null && !SelectedWorkouts.Contains(SelectedWorkout)) 
-            { SelectedWorkouts.Add(SelectedWorkout); }
+            { SelectedWorkouts.Add(SelectedWorkout); }  
         }
 
         private void RemoveWorkout()//ta bort tränings pass i listan

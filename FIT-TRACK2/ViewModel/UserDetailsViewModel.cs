@@ -41,7 +41,7 @@ namespace FIT_TRACK2.ViewModel
 		public string NewValtLand
         {
 			get { return _selectedcountry; }
-			set { _selectedcountry = value; }
+			set { _selectedcountry = value; OnPropertyChanged(); }
 		}
 
         public ObservableCollection<string> Land { get; set; }	//Lista
@@ -82,6 +82,7 @@ namespace FIT_TRACK2.ViewModel
             _userService.CurrentUser.Password = NewPasswordInput;
         
 			_userService.CurrentUser.UserName = NewUserNameInput; _userService.CurrentUser.Country = NewValtLand;
+			MessageBox.Show("Dina nya uppgifter är sparade!");
 		}
 
 		private void GoBack()//metod för att gå tillbaka

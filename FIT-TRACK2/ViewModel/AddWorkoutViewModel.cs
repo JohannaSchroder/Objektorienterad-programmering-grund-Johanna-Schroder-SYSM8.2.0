@@ -13,13 +13,14 @@ namespace FIT_TRACK2.ViewModel
     class AddWorkoutViewModel : baseViewModel
     {
 
-        public WorkoutService _workoutService;//hämtar WorkoutService
+        private readonly WorkoutService _workoutService;//hämtar WorkoutService
+        private Workout NewWorkout;//lagrar träningspass
+        private bool _editworkout;//kollar ifall användaren är i redigeringsläge, en loop
 
-        public Workout NewWorkout { get; set; }//egenskap för att det nya träningspasset som ska läggas till
 
-
-        public ICommand SaveCommand { get; set; }//kommando 
+        public ICommand SaveCommand { get; set; }//kommandon
         public ICommand GoBackCommand { get; set; }
+        public ICommand EditCommand { get; set; }
         
         //konstruktor
         public AddWorkoutViewModel()
@@ -27,6 +28,7 @@ namespace FIT_TRACK2.ViewModel
             _workoutService = WorkoutService.Instance;
             SaveCommand = new RelayCommand(Save);
             GoBackCommand = new RelayCommand(GoBack);
+            EditCommand = new RelayCommand(Edit);
         }
 
         private void Save()//en metod för att spara träningspass
@@ -38,6 +40,11 @@ namespace FIT_TRACK2.ViewModel
         { 
             WorkoutsWindow workoutsWindow = new WorkoutsWindow();
             workoutsWindow.Show();
+        }
+
+        private void Edit()//en metod för att ändra
+        {
+
         }
 
     }

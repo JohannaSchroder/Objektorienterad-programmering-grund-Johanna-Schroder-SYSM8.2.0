@@ -1,4 +1,5 @@
-﻿using FIT_TRACK2.ViewModel;
+﻿using FIT_TRACK2.Klasser;
+using FIT_TRACK2.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

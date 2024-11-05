@@ -6,73 +6,157 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
+using System.Windows.Input;
 
 namespace FIT_TRACK2.ViewModel
 {
-    class WorkoutDetailsViewModel : baseViewModel    
+    class WorkoutDetailsViewModel : baseViewModel
     {
         //egenskaper
+        private DateTime _date;
         public DateTime Date
         {
-            get => _workout.Date; 
+            get => _date;
             set
             {
-                _workout.Date = value;
+                _date = value;
                 OnPropertyChanged();
             }
         }
+        private string _type;
         public string WorkoutType
         {
-            get => _workout.Type;
+            get => _type;
             set
             {
-                _workout.Type = value;
+                _type = value;
                 OnPropertyChanged();
             }
         }
+        private TimeSpan _duration;
         public TimeSpan Duration
         {
-            get => _workout.Duration;
+            get => _duration;
             set
             {
-                _workout.Duration = value;
+                _duration = value;
                 OnPropertyChanged();
             }
         }
-        public string CaloriesBurned
+        private int _caloriesburned;
+        public int CaloriesBurned
         {
-            get => _workout.CaloriesBurned.ToString();
+            get => _caloriesburned;
             set
             {
-                if (int.TryParse(value, out var calories))
-                {
-                    _workout.CaloriesBurned = calories;
-                    OnPropertyChanged();
-                }
+                _caloriesburned = value;
+                OnPropertyChanged();
             }
         }
+        private string _notes;
         public string Notes
         {
-            get => _workout.Notes;
+            get => _notes;
             set
             {
-                _workout.Notes = value;
+                _notes = value;
                 OnPropertyChanged();
             }
         }
 
-        private Workout _workout;
-        public WorkoutDetailsViewModel(Workout workout)
+        public ICommand SaveCommand { get; set; }//kommandon
+        public ICommand EditCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
+
+        public WorkoutDetailsViewModel()//konstruktor
         {
-            _workout = workout;
+            _workoutService = WorkoutService.Instance;
+            _edit = false;
+            Date = _workout.Date;
+            WorkoutType = _workout.Type;
+            Duration = _workout.Duration;
+            CaloriesBurned = _workout.CaloriesBurned;
+            Notes = _workout.Notes;
+            SaveCommand = new RelayCommand(Save);
+            EditCommand = new RelayCommand(Edit);
+            GoBackCommand = new RelayCommand(GoBack);
         }
 
-        private WorkoutService _workoutService;//hämtar WorkoutService
 
-        //konstruktor
-        public WorkoutDetailsViewModel()
+        private readonly WorkoutService _workoutService;
+        private Workout _workout;//lagra träningspass
+        private bool _edit;//kollar ifall anävndaren är i redigeringsläge, en loop
+        private void Save() //metod för att spara
         {
-
+            if (Date == default || //kollar så alla fält är ifyllda
+                string.IsNullOrEmpty(WorkoutType) ||
+                Duration == default ||
+                CaloriesBurned <= 0 ||
+                string.IsNullOrEmpty(Notes))
+            {
+                MessageBox.Show("Du måste fylla i alla fält!");
+                return;
+            }
+            _workout.Date = Date;
+            _workout.Type = WorkoutType;
+            _workout.Duration = Duration;
+            _workout.CaloriesBurned = CaloriesBurned;
+            _workout.Notes = Notes;
+            _workoutService.AddWorkout(_workout);//uppdaterar träningspasset i WorkoutService
+            MessageBox.Show("Ditt träningspass är sparat! Du återgår nu till träningssidan.");
+            WorkoutsWindow workoutsWindow = new WorkoutsWindow();
+            workoutsWindow.Show();
         }
+
+        private void Edit()//en metod för att ändra
+        {
+            _edit = true;
+        }
+
+        private void GoBack()
+        {
+            _edit = false;
+            WorkoutsWindow workoutsWindow = new WorkoutsWindow(); 
+            workoutsWindow.Show();
+        }
+
+
+    }
+
+    public class BooleanToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value is bool boolean)
+            {
+                return boolean ? Visibility.Visible : Visibility.Collapsed;
+            }
+            return Visibility.Collapsed;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value is Visibility visibility) { return visibility == Visibility.Visible; }
+            return false;
+        }
+    }
+    public class InverseBooleanConverter : IValueConverter 
+    { 
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) 
+        { 
+            if (value is bool boolean) 
+            { 
+                return !boolean; 
+            } 
+            return false; 
+        } 
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) 
+        { 
+            if (value is bool boolean) 
+            { 
+                return !boolean; 
+            } 
+            return false; 
+        } 
     }
 }

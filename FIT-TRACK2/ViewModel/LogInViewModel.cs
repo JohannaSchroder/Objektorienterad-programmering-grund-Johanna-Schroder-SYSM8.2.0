@@ -61,6 +61,8 @@ namespace FIT_TRACK2
             }*/
            if (_userService.Login(UserNameBox, PasswordBox))
            {
+                User u = new User(UserNameBox, PasswordBox, "Sweden");
+                u.SignIn();
                 WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                 workoutsWindow.Show();
                 Application.Current.MainWindow.Close(); 
@@ -71,7 +73,7 @@ namespace FIT_TRACK2
             }
         }
         public void OpenRegisterWindow()//metod för att öppna registreringsfönster
-        { 
+        {
             RegisterWindow registerWindow = new RegisterWindow();
             registerWindow.Show();
             Application.Current.MainWindow.Close();
