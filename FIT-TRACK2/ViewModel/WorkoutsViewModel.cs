@@ -68,6 +68,7 @@ namespace FIT_TRACK2.ViewModel
         { 
             AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow();
             addWorkoutWindow.Show();
+            CloseService.CloseCurrentWindow?.Invoke();
         }
         private void AddWorkout()//metod för att lägga till träningspass i listan
         {
@@ -94,6 +95,7 @@ namespace FIT_TRACK2.ViewModel
             }
             WorkoutDetailWindow workoutDetailWindow = new WorkoutDetailWindow(); 
             workoutDetailWindow.Show();
+            CloseService.CloseCurrentWindow?.Invoke();
         }
         private bool CanExecuteWorkoutCommand()
         {
@@ -106,7 +108,7 @@ namespace FIT_TRACK2.ViewModel
         }
 
         private void OpenUserDetail()//metod för att komma till UserDetail
-        { 
+        {
             UserDetailWindow userDetailWindow = new UserDetailWindow();
             userDetailWindow.Show();
         }
@@ -115,6 +117,7 @@ namespace FIT_TRACK2.ViewModel
         {
             MainWindow mainWindow = new MainWindow(); 
             mainWindow.Show();
+            CloseService.CloseCurrentWindow?.Invoke();
         }
     }
 }

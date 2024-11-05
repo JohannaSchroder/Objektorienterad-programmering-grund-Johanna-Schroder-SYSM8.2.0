@@ -27,6 +27,7 @@ namespace FIT_TRACK2.Windows
         {
             InitializeComponent();
             this.DataContext = new WorkoutDetailsViewModel();
+            CloseService.CloseCurrentWindow = () => this.Close();
         }
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)

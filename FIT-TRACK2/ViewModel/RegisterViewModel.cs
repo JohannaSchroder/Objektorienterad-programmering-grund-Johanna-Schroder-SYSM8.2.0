@@ -90,7 +90,8 @@ namespace FIT_TRACK2.ViewModel
 					{ UserName = UserNameInput, Password = PasswordInput, Country = ValtLand });
 					MainWindow mainWindow = new MainWindow();
 					mainWindow.Show();
-				}
+                    CloseService.CloseCurrentWindow?.Invoke();
+                }
 				catch (System.Exception ex)
 				{
 					MessageBox.Show("Något gick fel, försök igen!");

@@ -107,6 +107,7 @@ namespace FIT_TRACK2.ViewModel
             MessageBox.Show("Ditt träningspass är sparat! Du återgår nu till träningssidan.");
             WorkoutsWindow workoutsWindow = new WorkoutsWindow();
             workoutsWindow.Show();
+            CloseService.CloseCurrentWindow?.Invoke();
         }
 
         private void Edit()//en metod för att ändra
@@ -119,44 +120,9 @@ namespace FIT_TRACK2.ViewModel
             _edit = false;
             WorkoutsWindow workoutsWindow = new WorkoutsWindow(); 
             workoutsWindow.Show();
+            CloseService.CloseCurrentWindow?.Invoke();
         }
 
 
-    }
-
-    public class BooleanToVisibilityConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value is bool boolean)
-            {
-                return boolean ? Visibility.Visible : Visibility.Collapsed;
-            }
-            return Visibility.Collapsed;
-        }
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value is Visibility visibility) { return visibility == Visibility.Visible; }
-            return false;
-        }
-    }
-    public class InverseBooleanConverter : IValueConverter 
-    { 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) 
-        { 
-            if (value is bool boolean) 
-            { 
-                return !boolean; 
-            } 
-            return false; 
-        } 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) 
-        { 
-            if (value is bool boolean) 
-            { 
-                return !boolean; 
-            } 
-            return false; 
-        } 
     }
 }
