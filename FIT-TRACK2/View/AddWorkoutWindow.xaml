@@ -31,20 +31,20 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="1"
-            Text="{Binding NewWorkout.Date, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
             Width="200"
-            Height="50"/>
+            Height="50" Margin="343,6,257,6"/>
         <TextBlock 
-            Grid.Row="1"
-            Text="Träning"
-            Width="100" Margin="178,62,522,0" Grid.RowSpan="2"
+            Grid.Row="2"
+            Text="Träning: Strengt eller Cardio"
+            Width="300" Margin="78,0,422,0"
             FontSize="20"
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="2"
-            Text="{Binding NewWorkout.WorkoutType, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding WorkoutType, UpdateSourceTrigger=PropertyChanged}"
             Width="200"
-            Height="50"/>
+            Height="50" Margin="343,2,257,10"/>
         <TextBlock 
             Grid.Row="2"
             Text="Varaktighet"
@@ -53,9 +53,9 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="3"
-            Text="{Binding NewWorkout.Duration, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"
             Width="200"
-            Height="50"/>
+            Height="50" Margin="343,6,257,6"/>
         <TextBlock 
             Grid.Row="3"
             Text="Calorier"
@@ -64,9 +64,9 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="4"
-            Text="{Binding NewWorkout.Calorier, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Calorier, UpdateSourceTrigger=PropertyChanged}"
             Width="200"
-            Height="50"/>
+            Height="50" Margin="343,6,257,6"/>
         <TextBlock 
             Grid.Row="4"
             Text="Notes"
@@ -75,26 +75,20 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="5"
-            Text="{Binding NewWorkout.Notes, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}"
             Width="200"
-            Height="50"/>
+            Height="50" Margin="343,6,257,6"/>
         <Button
-            Grid.Row="6"
+            Grid.Row="5"
             Width="100"
-            Height="50" Margin="505,5,195,7"
+            Height="50" Margin="393,62,307,12"
             Content="Spara"
-            Command="{Binding SaveCommand}"/>
+            Command="{Binding SaveCommand}" Grid.RowSpan="2"/>
         <Button 
              Grid.Row="6"
             Width="100"
-            Height="50" Margin="350,5,350,7"
+            Height="50" Margin="671,2,29,10"
             Content="Tillbaka"
             Command="{Binding GoBackCommand}"/>
-        <Button
-            Grid.Row="6"
-            Width="100"
-            Height="50" Margin="196,5,504,7"
-            Content="Ändra"
-            Command="{Binding EditCommand}"/>
     </Grid>
 </Window>
