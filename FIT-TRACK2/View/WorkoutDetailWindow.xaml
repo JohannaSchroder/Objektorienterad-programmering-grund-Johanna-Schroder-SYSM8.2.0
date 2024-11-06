@@ -31,7 +31,7 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="1"
-            Text="{Binding Workout.Date, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Text="{Binding Date, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             IsReadOnly="{Binding IsReadOnly}"
             Width="200"
             Height="50"/>
@@ -43,7 +43,7 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="2"
-            Text="{Binding Workout.WorkoutType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Text="{Binding WorkoutType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             IsReadOnly="{Binding IsReadOnly}"
             Width="200"
             Height="50"/>
@@ -55,7 +55,7 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="3"
-            Text="{Binding Workout.Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             IsReadOnly="{Binding IsReadOnly}"
             Width="200"
             Height="50"/>
@@ -67,7 +67,7 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="4"
-            Text="{Binding Workout.CaloriesBurned, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Text="{Binding CaloriesBurned, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             IsReadOnly="{Binding IsReadOnly}"
             Width="200"
             Height="50"/>
@@ -79,7 +79,7 @@
             VerticalAlignment="Center"/>
         <TextBox
             Grid.Row="5"
-            Text="{Binding Workout.Notes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             IsReadOnly="{Binding IsReadOnly}"
             Width="200"
             Height="50"/>

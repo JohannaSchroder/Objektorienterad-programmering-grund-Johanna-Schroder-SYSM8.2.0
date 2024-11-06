@@ -67,7 +67,7 @@ namespace FIT_TRACK2.ViewModel
         private void Save()//en metod för att spara träningspass
         {
             Workout nyWorkout;
-            if (Date == default || 
+            if (Date == default || //man behöver fylla i alla rutor
                 string.IsNullOrWhiteSpace(WorkoutType) ||
                Duration == default || 
                Calorier <= 0 || 
@@ -75,10 +75,10 @@ namespace FIT_TRACK2.ViewModel
             {
                 MessageBox.Show("Du måste fylla i alla rutor!");
             }
-            if (WorkoutType == WorkoutType)
+            if (WorkoutType == WorkoutType)//kollar vad som srivs i rutan
             {
                 nyWorkout = new StrengthWorkout(DateTime.Today, "Strength", TimeSpan.Zero, 0, "Styrka", 10)
-                {
+                {//lägger in de nya värderna
                     Date = Date,
                     Type = WorkoutType,
                     Duration = Duration,
@@ -91,7 +91,7 @@ namespace FIT_TRACK2.ViewModel
                 MessageBox.Show("Något gick fel!");
                 return;
             }
-            // Lägger till träningspasset i listan
+            // sparar träningspasset i listan
             WorkoutService.Instance.AddWorkout(nyWorkout);
             MessageBox.Show("Träningspasset är sparat och du återgår nu till träningssidan!");
             WorkoutsWindow workoutsWindow = new WorkoutsWindow();

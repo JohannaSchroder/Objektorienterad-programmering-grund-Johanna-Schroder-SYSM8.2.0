@@ -103,7 +103,7 @@ namespace FIT_TRACK2.ViewModel
 
 
         private readonly WorkoutService _workoutService;
-        private Workout workout;
+
         private void Save() //metod för att spara
         {
             if (Date == default || //kollar så alla fält är ifyllda
@@ -114,10 +114,6 @@ namespace FIT_TRACK2.ViewModel
             {
                 MessageBox.Show("Du måste fylla i alla fält!");
                 return;
-            }
-            else
-            {
-                MessageBox.Show("Något gick fel!");
             }
                _workout.Date = Date;
                _workout.Type = WorkoutType;
