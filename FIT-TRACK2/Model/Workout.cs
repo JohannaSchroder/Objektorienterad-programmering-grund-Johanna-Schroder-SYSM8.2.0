@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FIT_TRACK2.Klasser
 {
-    abstract class Workout//abstrakt basklass
+    public abstract class Workout//abstrakt basklass
     {
         //egenskaper
         public DateTime Date { get; set; }

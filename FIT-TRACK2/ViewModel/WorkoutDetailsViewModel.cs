@@ -65,19 +65,27 @@ namespace FIT_TRACK2.ViewModel
             }
         }
 
+        private Workout _workout;
+        public Workout Workout
+        {
+            get { return _workout; }
+            set { _workout = value; OnPropertyChanged(); }
+        }
+
         public ICommand SaveCommand { get; set; }//kommandon
         public ICommand EditCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
 
-        public WorkoutDetailsViewModel()//konstruktor
+        public WorkoutDetailsViewModel(Workout workout)//konstruktor
         {
             _workoutService = WorkoutService.Instance;
             _edit = false;
-            Date = _workout.Date;
-            WorkoutType = _workout.Type;
-            Duration = _workout.Duration;
-            CaloriesBurned = _workout.CaloriesBurned;
-            Notes = _workout.Notes;
+            Workout = workout;
+            Date = workout.Date;
+            WorkoutType = workout.Type;
+            Duration = workout.Duration;
+            CaloriesBurned = workout.CaloriesBurned;
+            Notes = workout.Notes;
             SaveCommand = new RelayCommand(Save);
             EditCommand = new RelayCommand(Edit);
             GoBackCommand = new RelayCommand(GoBack);
@@ -85,7 +93,7 @@ namespace FIT_TRACK2.ViewModel
 
 
         private readonly WorkoutService _workoutService;
-        private Workout _workout;//lagra träningspass
+        private Workout workout;//lagra träningspass
         private bool _edit;//kollar ifall anävndaren är i redigeringsläge, en loop
         private void Save() //metod för att spara
         {

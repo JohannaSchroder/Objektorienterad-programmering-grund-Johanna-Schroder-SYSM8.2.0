@@ -23,10 +23,10 @@ namespace FIT_TRACK2.Windows
     /// </summary>
     public partial class WorkoutDetailWindow : Window, INotifyPropertyChanged
     {
-        public WorkoutDetailWindow()
+        public WorkoutDetailWindow(Workout selectedWorkout)
         {
             InitializeComponent();
-            this.DataContext = new WorkoutDetailsViewModel();
+            this.DataContext = new WorkoutDetailsViewModel(selectedWorkout);
         }
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)

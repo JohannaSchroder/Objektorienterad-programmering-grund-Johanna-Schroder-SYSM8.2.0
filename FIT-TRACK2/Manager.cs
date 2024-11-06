@@ -22,6 +22,8 @@ namespace FIT_TRACK2
         
         public User CurrentUser { get; set; }//egenskap för att hämta inloggad användare
 
+        public User CurrentAdmin { get; set; }//för inloggad admin
+
         private UserService()
         {
             ListaUsers = new List<User>();
@@ -67,6 +69,10 @@ namespace FIT_TRACK2
             return ListaUsers;
         }
 
+        public bool currentAdmin()//kollar om den inloggade är admin
+        {
+            return true; 
+        }
 
     }
 
@@ -74,26 +80,16 @@ namespace FIT_TRACK2
 
         internal class WorkoutService
         {
-        private static WorkoutService _instance;//Singleton
-        private static readonly object _lock = new object();
+        private static WorkoutService _instance;
+        public static WorkoutService Instance => _instance ??= new WorkoutService();
+        
+
         private WorkoutService()
-        { }
-        public static WorkoutService Instance
         {
-            get
-            {
-                lock (_lock)
-                {
-                    if (_instance == null)
-                    {
-                        _instance = new WorkoutService();
-                    }
-                    return _instance;
-                }
-            }
+            _workouts = new List<Workout>();
         }
 
-        private List<Workout> _workouts = new List<Workout>(); //lista som sparar träningspass
+        private List<Workout> _workouts; //lista som sparar träningspass
             public void AddWorkout(Workout workout) //medtod för att lägga till nytt träningspass
             { 
                 _workouts.Add(workout); 
@@ -102,9 +98,14 @@ namespace FIT_TRACK2
             { 
                 _workouts.Remove(workout); 
             }
-            public List<Workout> GetWorkouts() //metod för att visa alla träningspass
+            public IEnumerable<Workout> GetWorkouts() //metod för att visa alla träningspass
             { 
                 return _workouts; 
             }
-        }
+            public IEnumerable<Workout> GetWorkouts(IEnumerable<User> users)
+            {
+            // Implementera logik för att hämta träningspass för specifika användare
+            return _workouts.Where(w => users.Any(u => u.UserName == w.Type));
+            }
+    }
 }

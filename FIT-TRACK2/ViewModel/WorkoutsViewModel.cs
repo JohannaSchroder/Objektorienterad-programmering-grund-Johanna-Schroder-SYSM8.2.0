@@ -49,6 +49,8 @@ namespace FIT_TRACK2.ViewModel
             _workoutService = WorkoutService.Instance; //hämta instansen av WorkoutService och UserService
             _userService = UserService.Instance;
             UserName = _userService.CurrentUser?.UserName;// hämtar användarnamnet för den inloggade användaren
+            AdminOnline = _userService.currentAdmin();
+            ShowWorkoutsAdmin();
             AddWorkoutCommand = new RelayCommand(AddWorkout);//bindning till metoder
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkout, CanExecuteWorkoutCommand);
             ShowDetailsCommand = new RelayCommand(ViewDetails, CanExecuteWorkoutCommand);
@@ -58,14 +60,42 @@ namespace FIT_TRACK2.ViewModel
             OpenAddWorkoutCommand = new RelayCommand(OpenAddWorkout);
             Workouts = new ObservableCollection<Workout>(_workoutService.GetWorkouts());//lista med workouts
             SelectedWorkouts = new ObservableCollection<Workout>();
+            AddWorkouts();//lägga till träningspass
         }
 
 
         public ObservableCollection<Workout> Workouts { get; set; }//listor
         public ObservableCollection<Workout> SelectedWorkouts { get; set; }
+        public bool AdminOnline { get; set; }
 
+        private void AddWorkouts()//läger till träningspass i listan
+        {
+            var strengthWorkout = new StrengthWorkout(DateTime.Now, "Strength", TimeSpan.Zero, 100, "Strenght träning", 10)
+            {
+            };
+
+            var cardioWorkout = new CardioWorkout(DateTime.Now, "Cardio", TimeSpan.Zero, 100, "Cardio träning", 10000)
+            {
+            };
+
+            Workouts.Add(strengthWorkout);
+            Workouts.Add(cardioWorkout);
+        }
+
+
+        private void ShowWorkoutsAdmin()
+        {
+            if (AdminOnline)
+            {
+                Workouts = new ObservableCollection<Workout>(_workoutService.GetWorkouts());
+            }
+            else
+            {    
+                Workouts = new ObservableCollection<Workout>(_workoutService.GetWorkouts(_userService.GetUsers()));
+            }
+        }
         private void OpenAddWorkout()//metod som öppnar AddworkoutWindow
-        { 
+        {
             AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow();
             addWorkoutWindow.Show();
         }
@@ -92,7 +122,7 @@ namespace FIT_TRACK2.ViewModel
                 MessageBox.Show("Markera ett träningspass först."); 
                 return; 
             }
-            WorkoutDetailWindow workoutDetailWindow = new WorkoutDetailWindow(); 
+            WorkoutDetailWindow workoutDetailWindow = new WorkoutDetailWindow(SelectedWorkout); 
             workoutDetailWindow.Show();
         }
         private bool CanExecuteWorkoutCommand()
