@@ -12,7 +12,6 @@ namespace FIT_TRACK2
     internal class Manager
     {
     }
-
     internal class UserService//klass för att lägga till nya användare och kontrollera så inte användaren redan finns
     {
         private static UserService _instance;//Singleton

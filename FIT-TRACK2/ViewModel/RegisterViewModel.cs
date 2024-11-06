@@ -91,6 +91,7 @@ namespace FIT_TRACK2.ViewModel
 					{ UserName = UserNameInput, Password = PasswordInput, Country = ValtLand });
 					MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
+					CloseCurrentWindow();
                 }
 				catch (System.Exception ex)
 				{
@@ -98,6 +99,17 @@ namespace FIT_TRACK2.ViewModel
 				}
 			}
 		}
+        private void CloseCurrentWindow()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.DataContext == this)
+                {
+                    window.Close();
+                    break;
+                }
+            }
+        }
     }
 }
 

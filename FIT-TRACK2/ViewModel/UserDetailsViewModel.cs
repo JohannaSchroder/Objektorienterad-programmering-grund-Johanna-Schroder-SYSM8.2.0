@@ -85,15 +85,27 @@ namespace FIT_TRACK2.ViewModel
 			MessageBox.Show("Dina nya uppgifter är sparade! Du går nu tillbaka till träningssidan.");
             WorkoutsWindow workoutsWindow = new WorkoutsWindow();
             workoutsWindow.Show();
+			CloseCurrentWindow();
         }
 
 		private void GoBack()//metod för att gå tillbaka
 		{ 
 			WorkoutsWindow workoutsWindow = new WorkoutsWindow();
 			workoutsWindow.Show();
+			CloseCurrentWindow();
         }
 
+        private void CloseCurrentWindow()//metod för att stänga fönster
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.DataContext == this)
+                {
+                    window.Close();
+                    break;
+                }
+            }
+        }
 
-
-	}
+    }
 }

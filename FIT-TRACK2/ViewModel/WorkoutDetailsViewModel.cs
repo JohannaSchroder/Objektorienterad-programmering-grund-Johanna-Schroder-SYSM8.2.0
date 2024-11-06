@@ -115,7 +115,7 @@ namespace FIT_TRACK2.ViewModel
                 MessageBox.Show("Du måste fylla i alla fält!");
                 return;
             }
-               _workout.Date = Date;
+               _workout.Date = Date;//lägger in de nya värderna
                _workout.Type = WorkoutType;
                _workout.Duration = Duration;
                _workout.CaloriesBurned = CaloriesBurned;
@@ -125,6 +125,7 @@ namespace FIT_TRACK2.ViewModel
                MessageBox.Show("Ditt träningspass är sparat! Du återgår nu till träningssidan.");
                WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                workoutsWindow.Show();
+               CloseCurrentWindow();
         }
 
         private void Edit()//en metod för att ändra
@@ -132,12 +133,24 @@ namespace FIT_TRACK2.ViewModel
                 IsReadOnly = false;
         }
 
-        private void GoBack()
+        private void GoBack()//metod för att gå tillbaka
         {
             WorkoutsWindow workoutsWindow = new WorkoutsWindow(); 
             workoutsWindow.Show();
+            CloseCurrentWindow();
         }
 
+        private void CloseCurrentWindow()//metod för att stänga fönster
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.DataContext == this)
+                {
+                    window.Close();
+                    break;
+                }
+            }
+        }
 
     }
 }

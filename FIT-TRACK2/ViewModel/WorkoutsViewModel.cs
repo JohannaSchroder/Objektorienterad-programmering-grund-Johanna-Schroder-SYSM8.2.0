@@ -83,7 +83,7 @@ namespace FIT_TRACK2.ViewModel
         }
 
 
-        private void ShowWorkoutsAdmin()
+        private void ShowWorkoutsAdmin()//visar alla träningspass i listan som användare lagt till
         {
             if (AdminOnline)
             {
@@ -98,6 +98,7 @@ namespace FIT_TRACK2.ViewModel
         {
             AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow();
             addWorkoutWindow.Show();
+            CloseCurrentWindow();
         }
         private void AddWorkout()//metod för att lägga till träningspass i listan
         {
@@ -124,6 +125,7 @@ namespace FIT_TRACK2.ViewModel
             }
             WorkoutDetailWindow workoutDetailWindow = new WorkoutDetailWindow(SelectedWorkout); 
             workoutDetailWindow.Show();
+            CloseCurrentWindow();
         }
         private bool CanExecuteWorkoutCommand()
         {
@@ -139,14 +141,26 @@ namespace FIT_TRACK2.ViewModel
         {
             var userDetailWindow = new UserDetailWindow();
             userDetailWindow.Show();
-
+            CloseCurrentWindow();
         }
 
         private void SignOut() //metod för att logga ut
         {
             var mainWindow = new MainWindow(); 
             mainWindow.Show();
+            CloseCurrentWindow();
+        }
 
+        private void CloseCurrentWindow()//metod för att stänga fönster
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.DataContext == this)
+                {
+                    window.Close();
+                    break;
+                }
+            }
         }
     }
 }
