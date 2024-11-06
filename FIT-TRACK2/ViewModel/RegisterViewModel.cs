@@ -59,7 +59,6 @@ namespace FIT_TRACK2.ViewModel
 		}
 		private readonly UserService _userService;
         public ICommand SignUpCommand { get; }
-        private Window _currentWindow;//för att kunna stänga fönstret när man öppnar ett nytt 
         //konstruktor
         public RegisterViewModel()
 		{
