@@ -107,7 +107,7 @@ namespace FIT_TRACK2.ViewModel
             MessageBox.Show("Ditt träningspass är sparat! Du återgår nu till träningssidan.");
             WorkoutsWindow workoutsWindow = new WorkoutsWindow();
             workoutsWindow.Show();
-            CloseService.CloseCurrentWindow?.Invoke();
+
         }
 
         private void Edit()//en metod för att ändra
@@ -120,7 +120,6 @@ namespace FIT_TRACK2.ViewModel
             _edit = false;
             WorkoutsWindow workoutsWindow = new WorkoutsWindow(); 
             workoutsWindow.Show();
-            CloseService.CloseCurrentWindow?.Invoke();
         }
 
 

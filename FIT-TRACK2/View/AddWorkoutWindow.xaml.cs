@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FIT_TRACK2.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace FIT_TRACK2.Windows
         public AddWorkoutWindow()
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.AddWorkoutViewModel();
+            this.DataContext = new AddWorkoutViewModel();
             CloseService.CloseCurrentWindow = () => this.Close();
         }
 

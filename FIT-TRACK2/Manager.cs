@@ -12,10 +12,6 @@ namespace FIT_TRACK2
     internal class Manager
     {
     }
-    public static class CloseService//en klass för att stänga bakom-fönster
-    {
-        public static Action CloseCurrentWindow { get; set; }
-    }
 
     internal class UserService//klass för att lägga till nya användare och kontrollera så inte användaren redan finns
     {
