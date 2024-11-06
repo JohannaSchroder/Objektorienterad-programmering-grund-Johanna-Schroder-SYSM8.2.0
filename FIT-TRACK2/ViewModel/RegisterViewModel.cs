@@ -58,10 +58,10 @@ namespace FIT_TRACK2.ViewModel
 			}
 		}
 		private readonly UserService _userService;
-        public ICommand SignUpCommand { get; } 
-
-		//konstruktor
-		public RegisterViewModel()
+        public ICommand SignUpCommand { get; }
+        private Window _currentWindow;//för att kunna stänga fönstret när man öppnar ett nytt 
+        //konstruktor
+        public RegisterViewModel()
 		{
             _userService = UserService.Instance;
             SignUpCommand = new RelayCommand(SignUp);
@@ -89,7 +89,7 @@ namespace FIT_TRACK2.ViewModel
 					_userService.RegisterUser(new User("admin", "password", "Sweden")
 					{ UserName = UserNameInput, Password = PasswordInput, Country = ValtLand });
 					MainWindow mainWindow = new MainWindow();
-					mainWindow.Show();
+                    mainWindow.Show();
                 }
 				catch (System.Exception ex)
 				{

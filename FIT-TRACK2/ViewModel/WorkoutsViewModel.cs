@@ -68,7 +68,6 @@ namespace FIT_TRACK2.ViewModel
         { 
             AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow();
             addWorkoutWindow.Show();
-            CloseService.CloseCurrentWindow?.Invoke();
         }
         private void AddWorkout()//metod för att lägga till träningspass i listan
         {

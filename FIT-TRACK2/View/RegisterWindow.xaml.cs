@@ -27,7 +27,6 @@ namespace FIT_TRACK2.Windows
         {
             InitializeComponent();
             this.DataContext = new RegisterViewModel();
-            CloseService.CloseCurrentWindow = () => this.Close();
         }
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
