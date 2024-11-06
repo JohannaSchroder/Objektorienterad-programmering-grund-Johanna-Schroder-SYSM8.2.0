@@ -95,7 +95,7 @@ namespace FIT_TRACK2.ViewModel
                 }
 				catch (System.Exception ex)
 				{
-					MessageBox.Show("Något gick fel, försök igen!");
+					MessageBox.Show("Användarnamet finns redan!");
 				}
 			}
 		}
