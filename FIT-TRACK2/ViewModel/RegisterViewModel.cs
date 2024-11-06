@@ -76,10 +76,12 @@ namespace FIT_TRACK2.ViewModel
 				string.IsNullOrWhiteSpace(ValtLand))
 			{
                 MessageBox.Show("Du måste fylla i alla rutor!");
+				return;
 			}
 			if (PasswordInput != (ConfirmedPassword))
 			{
 				MessageBox.Show("Lösenorden matchar inte!");
+				return;
 			}
 			else
 			{

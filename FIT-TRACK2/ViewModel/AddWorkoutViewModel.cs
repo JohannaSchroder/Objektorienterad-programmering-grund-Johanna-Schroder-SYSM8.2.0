@@ -67,15 +67,15 @@ namespace FIT_TRACK2.ViewModel
         private void Save()//en metod för att spara träningspass
         {
             Workout nyWorkout;
-            if (Date != default(DateTime) || 
-                !string.IsNullOrWhiteSpace(WorkoutType) ||
-               Duration != default(TimeSpan) || 
-               Calorier > 0 || 
-               !string.IsNullOrWhiteSpace(Notes))
+            if (Date == default || 
+                string.IsNullOrWhiteSpace(WorkoutType) ||
+               Duration == default || 
+               Calorier <= 0 || 
+               string.IsNullOrWhiteSpace(Notes))
             {
                 MessageBox.Show("Du måste fylla i alla rutor!");
             }
-            if (WorkoutType == "Strength")
+            if (WorkoutType == WorkoutType)
             {
                 nyWorkout = new StrengthWorkout(DateTime.Today, "Strength", TimeSpan.Zero, 0, "Styrka", 10)
                 {
@@ -84,24 +84,11 @@ namespace FIT_TRACK2.ViewModel
                     Duration = Duration,
                     CaloriesBurned = Calorier,
                     Notes = Notes,
-                    Repetations = 10
-                };
-            }
-            if (WorkoutType == "Cardio")
-            {
-                nyWorkout = new CardioWorkout(DateTime.Today, "Strength", TimeSpan.Zero, 0, "Styrka", 5000)
-                {
-                    Date = Date,
-                    Type = WorkoutType,
-                    Duration = Duration,
-                    CaloriesBurned = Calorier,
-                    Notes = Notes,
-                    Distance = 5000
                 };
             }
             else
             {
-                MessageBox.Show("Du måste välja Strength eller Cardio");
+                MessageBox.Show("Något gick fel!");
                 return;
             }
             // Lägger till träningspasset i listan

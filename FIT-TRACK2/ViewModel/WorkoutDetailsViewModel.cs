@@ -24,6 +24,7 @@ namespace FIT_TRACK2.ViewModel
                 OnPropertyChanged();
             }
         }
+
         private string _type;
         public string WorkoutType
         {
@@ -34,6 +35,7 @@ namespace FIT_TRACK2.ViewModel
                 OnPropertyChanged();
             }
         }
+
         private TimeSpan _duration;
         public TimeSpan Duration
         {
@@ -44,6 +46,7 @@ namespace FIT_TRACK2.ViewModel
                 OnPropertyChanged();
             }
         }
+
         private int _caloriesburned;
         public int CaloriesBurned
         {
@@ -54,6 +57,7 @@ namespace FIT_TRACK2.ViewModel
                 OnPropertyChanged();
             }
         }
+
         private string _notes;
         public string Notes
         {
@@ -72,6 +76,13 @@ namespace FIT_TRACK2.ViewModel
             set { _workout = value; OnPropertyChanged(); }
         }
 
+        private bool _isReadOnly = true;
+        public bool IsReadOnly
+        {
+            get { return _isReadOnly; }
+            set { _isReadOnly = value; OnPropertyChanged(nameof(IsReadOnly)); }
+        }
+
         public ICommand SaveCommand { get; set; }//kommandon
         public ICommand EditCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
@@ -79,7 +90,6 @@ namespace FIT_TRACK2.ViewModel
         public WorkoutDetailsViewModel(Workout workout)//konstruktor
         {
             _workoutService = WorkoutService.Instance;
-            _edit = false;
             Workout = workout;
             Date = workout.Date;
             WorkoutType = workout.Type;
@@ -93,39 +103,41 @@ namespace FIT_TRACK2.ViewModel
 
 
         private readonly WorkoutService _workoutService;
-        private Workout workout;//lagra träningspass
-        private bool _edit;//kollar ifall anävndaren är i redigeringsläge, en loop
+        private Workout workout;
         private void Save() //metod för att spara
         {
             if (Date == default || //kollar så alla fält är ifyllda
-                string.IsNullOrEmpty(WorkoutType) ||
+                string.IsNullOrWhiteSpace(WorkoutType) ||
                 Duration == default ||
                 CaloriesBurned <= 0 ||
-                string.IsNullOrEmpty(Notes))
+                string.IsNullOrWhiteSpace(Notes))
             {
                 MessageBox.Show("Du måste fylla i alla fält!");
                 return;
             }
-            _workout.Date = Date;
-            _workout.Type = WorkoutType;
-            _workout.Duration = Duration;
-            _workout.CaloriesBurned = CaloriesBurned;
-            _workout.Notes = Notes;
-            _workoutService.AddWorkout(_workout);//uppdaterar träningspasset i WorkoutService
-            MessageBox.Show("Ditt träningspass är sparat! Du återgår nu till träningssidan.");
-            WorkoutsWindow workoutsWindow = new WorkoutsWindow();
-            workoutsWindow.Show();
-
+            else
+            {
+                MessageBox.Show("Något gick fel!");
+            }
+               _workout.Date = Date;
+               _workout.Type = WorkoutType;
+               _workout.Duration = Duration;
+               _workout.CaloriesBurned = CaloriesBurned;
+               _workout.Notes = Notes;
+               IsReadOnly = true;
+               _workoutService.AddWorkout(_workout);//uppdaterar träningspasset i WorkoutService
+               MessageBox.Show("Ditt träningspass är sparat! Du återgår nu till träningssidan.");
+               WorkoutsWindow workoutsWindow = new WorkoutsWindow();
+               workoutsWindow.Show();
         }
 
         private void Edit()//en metod för att ändra
         {
-            _edit = true;
+                IsReadOnly = false;
         }
 
         private void GoBack()
         {
-            _edit = false;
             WorkoutsWindow workoutsWindow = new WorkoutsWindow(); 
             workoutsWindow.Show();
         }
