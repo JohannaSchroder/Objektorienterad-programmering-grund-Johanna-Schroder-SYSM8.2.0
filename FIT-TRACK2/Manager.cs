@@ -70,7 +70,12 @@ namespace FIT_TRACK2
             return ListaUsers;
         }
 
-        public bool currentAdmin()//kollar om den inloggade är admin
+        public void Logout()
+        {
+            CurrentUser = null; // Rensa CurrentUser vid utloggning }
+        }
+
+            public bool currentAdmin()//kollar om den inloggade är admin
         {
             return CurrentUser != null && CurrentUser.IsAdmin;
         }
