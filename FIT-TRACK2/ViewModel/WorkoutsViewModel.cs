@@ -26,6 +26,18 @@ namespace FIT_TRACK2.ViewModel
             set { _selectedWorkout = value; OnPropertyChanged(); }
         }
 
+        private User _currentUser; 
+        public User CurrentUser
+        {
+            get { return _currentUser; }
+            set
+            {
+                _currentUser = value; 
+                OnPropertyChanged(nameof(CurrentUser)); 
+                OnPropertyChanged(nameof(Username)); //Username uppdateras
+            } 
+        }
+
 
         //Kommandon
         public ICommand RemoveWorkoutCommand { get; set; }

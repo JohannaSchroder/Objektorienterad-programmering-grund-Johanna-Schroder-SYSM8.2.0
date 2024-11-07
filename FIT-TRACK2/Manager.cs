@@ -61,8 +61,14 @@ namespace FIT_TRACK2
             CurrentUser = user;
         }
         public bool Login(string username, string password)//metod för att logga in
-        { 
-            return ListaUsers.Any(u => u.UserName == username && u.Password == password); //kollar så avnändarnamn och lösenord matchar
+        {
+            var user = ListaUsers.SingleOrDefault(u => u.UserName == username && u.Password == password); 
+            if (user != null) 
+            { 
+                CurrentUser = user; 
+                return true; 
+            }
+            return false; //kollar så avnändarnamn och lösenord matchar
         }
 
         public List<User> GetUsers()//metod för att kolla alla användare
@@ -72,7 +78,7 @@ namespace FIT_TRACK2
 
         public void Logout()
         {
-            CurrentUser = null; // Rensa CurrentUser vid utloggning }
+            CurrentUser = null; // tar bort användaren vid utloggning
         }
 
             public bool currentAdmin()//kollar om den inloggade är admin
