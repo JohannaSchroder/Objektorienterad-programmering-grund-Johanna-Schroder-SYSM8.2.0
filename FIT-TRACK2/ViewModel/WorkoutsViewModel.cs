@@ -37,7 +37,7 @@ namespace FIT_TRACK2.ViewModel
         public ICommand OpenAddWorkoutCommand { get; }
 
         public bool IsAdmin => _userService.currentAdmin();
-        public string Username => _userService.CurrentUser.UserName;
+        public string Username => _userService.CurrentUser.UserName;//sätter användarnamn uppe i vänstra hörnet
         //konstruktor
         public WorkoutsViewModel()
         {
@@ -140,6 +140,7 @@ namespace FIT_TRACK2.ViewModel
 
         private void SignOut() //metod för att logga ut
         {
+            _userService.CurrentUser = null;
             var mainWindow = new MainWindow(); 
             mainWindow.Show();
             CloseCurrentWindow();
