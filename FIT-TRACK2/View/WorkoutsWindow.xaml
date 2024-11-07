@@ -36,12 +36,6 @@
             x:Name="btnUser" 
             Content="User Inställningar" 
             Command="{Binding OpenUserDetailWindow}" Margin="10,10,640,0" Grid.Row="5"/>
-        <Button
-          Margin="300,5,300,5"      Height="50"
-            Width="200"
-            x:Name="btnAddWorkout"
-            Content="Lägg till Träningspass i listan"
-            Command="{Binding AddWorkoutCommand }" Grid.Row="2"/>
 
         <ComboBox 
             Width="200"
@@ -51,13 +45,6 @@
             SelectedItem="{Binding SelectedWorkout}"
             DisplayMemberPath="Type"
              HorizontalAlignment="Center" Margin="0,5,0,5" Grid.Row="1"/>
-
-        <ListBox
-            x:Name="ListboxSelected"
-            ItemsSource="{Binding SelectedWorkouts}" 
-            SelectedItem="{Binding SelectedWorkout}"
-            DisplayMemberPath="Type"
-            Width="200" Margin="300,0,300,0" Grid.Row="3"/>
 
         <Button 
             Width="200"
@@ -69,15 +56,15 @@
         <Button 
             Width="100"
             Height="50"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Center"
             Content="Details" 
-            Command="{Binding ShowDetailsCommand}" Margin="532,5,0,5" Grid.Row="3" />
+            Command="{Binding ShowDetailsCommand}" Margin="0,5,0,5" Grid.Row="2" />
         <Button 
             Width="100"
             Height="50"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Center"
             Content="Remove" 
-            Command="{Binding RemoveWorkoutCommand}" Margin="174,5,0,5" Grid.Row="3" />
+            Command="{Binding RemoveWorkoutCommand}" Margin="0,5,0,5" Grid.Row="3" />
         <Button 
             Width="100"
             Height="50"

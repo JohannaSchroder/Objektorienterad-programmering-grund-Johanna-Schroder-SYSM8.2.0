@@ -33,7 +33,6 @@ namespace FIT_TRACK2.ViewModel
         }
 
         //Kommandon
-        public ICommand AddWorkoutCommand { get; }
         public ICommand RemoveWorkoutCommand { get; set; }
         public ICommand SignOutCommand { get; }
         public ICommand ShowDetailsCommand { get; }
@@ -51,7 +50,7 @@ namespace FIT_TRACK2.ViewModel
             UserName = _userService.CurrentUser?.UserName;// hämtar användarnamnet för den inloggade användaren
             AdminOnline = _userService.currentAdmin();
             ShowWorkoutsAdmin();
-            AddWorkoutCommand = new RelayCommand(AddWorkout);//bindning till metoder
+            //bindning till metoder
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkout, CanExecuteWorkoutCommand);
             ShowDetailsCommand = new RelayCommand(ViewDetails, CanExecuteWorkoutCommand);
             SignOutCommand = new RelayCommand(SignOut);
@@ -100,11 +99,6 @@ namespace FIT_TRACK2.ViewModel
             addWorkoutWindow.Show();
             CloseCurrentWindow();
         }
-        private void AddWorkout()//metod för att lägga till träningspass i listan
-        {
-            if (SelectedWorkout != null && !SelectedWorkouts.Contains(SelectedWorkout)) 
-            { SelectedWorkouts.Add(SelectedWorkout); }  
-        }
 
         private void RemoveWorkout()//ta bort tränings pass i listan
         {
@@ -113,7 +107,7 @@ namespace FIT_TRACK2.ViewModel
                 MessageBox.Show("Markera ett träningspass först."); 
                 return; 
             }
-            SelectedWorkouts.Remove(SelectedWorkout);
+            Workouts.Remove(SelectedWorkout);
         }
 
         private void ViewDetails()//kolla information om träningspasset
