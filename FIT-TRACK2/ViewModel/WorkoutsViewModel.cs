@@ -43,7 +43,7 @@ namespace FIT_TRACK2.ViewModel
         public ICommand RemoveWorkoutCommand { get; set; }
         public ICommand SignOutCommand { get; }
         public ICommand ShowDetailsCommand { get; }
-        public ICommand ShowUserCommand { get; }
+        public ICommand ShowUserCommand { get; } 
         public ICommand ShowInfoCommand { get; }
         public ICommand OpenUserDetailWindow { get; }
         public ICommand OpenAddWorkoutCommand { get; }
