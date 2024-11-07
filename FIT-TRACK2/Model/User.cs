@@ -14,7 +14,7 @@ namespace FIT_TRACK2.Klasser
     {
         //egenskaper
         public string Country { get; set; }
-
+        public bool IsAdmin { get; set; }//för inloggad admin
 
         //konstruktor
         public User(string UserName, string Password, string Country) : base(UserName, Password)

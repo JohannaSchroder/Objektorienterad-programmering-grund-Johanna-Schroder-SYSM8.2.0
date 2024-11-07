@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace FIT_TRACK2.ViewModel
@@ -25,12 +26,6 @@ namespace FIT_TRACK2.ViewModel
             set { _selectedWorkout = value; OnPropertyChanged(); }
         }
 
-        private string _username;
-        public string UserName
-        {
-            get { return _username; }
-            set { _username = value; OnPropertyChanged(nameof(UserName)); }
-        }
 
         //Kommandon
         public ICommand RemoveWorkoutCommand { get; set; }
@@ -41,14 +36,13 @@ namespace FIT_TRACK2.ViewModel
         public ICommand OpenUserDetailWindow { get; }
         public ICommand OpenAddWorkoutCommand { get; }
 
-
+        public bool IsAdmin => _userService.currentAdmin();
+        public string Username => _userService.CurrentUser.UserName;
         //konstruktor
         public WorkoutsViewModel()
         {
             _workoutService = WorkoutService.Instance; //hämta instansen av WorkoutService och UserService
             _userService = UserService.Instance;
-            UserName = _userService.CurrentUser?.UserName;// hämtar användarnamnet för den inloggade användaren
-            AdminOnline = _userService.currentAdmin();
             ShowWorkoutsAdmin();
             //bindning till metoder
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkout, CanExecuteWorkoutCommand);
@@ -65,9 +59,8 @@ namespace FIT_TRACK2.ViewModel
 
         public ObservableCollection<Workout> Workouts { get; set; }//listor
         public ObservableCollection<Workout> SelectedWorkouts { get; set; }
-        public bool AdminOnline { get; set; }
 
-        private void AddWorkouts()//läger till träningspass i listan
+        private void AddWorkouts()//lägger till träningspass i listan
         {
             var strengthWorkout = new StrengthWorkout(DateTime.Now, "Strength", TimeSpan.Zero, 100, "Strenght träning", 10)
             {
@@ -84,7 +77,7 @@ namespace FIT_TRACK2.ViewModel
 
         private void ShowWorkoutsAdmin()//visar alla träningspass i listan som användare lagt till
         {
-            if (AdminOnline)
+            if (IsAdmin)
             {
                 Workouts = new ObservableCollection<Workout>(_workoutService.GetWorkouts());
             }
@@ -95,9 +88,9 @@ namespace FIT_TRACK2.ViewModel
         }
         private void OpenAddWorkout()//metod som öppnar AddworkoutWindow
         {
-            AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow();
-            addWorkoutWindow.Show();
-            CloseCurrentWindow();
+                AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow();
+                addWorkoutWindow.Show();
+                CloseCurrentWindow();
         }
 
         private void RemoveWorkout()//ta bort tränings pass i listan
@@ -133,9 +126,16 @@ namespace FIT_TRACK2.ViewModel
 
         private void OpenUserDetail()//metod för att komma till UserDetail
         {
-            var userDetailWindow = new UserDetailWindow();
-            userDetailWindow.Show();
-            CloseCurrentWindow();
+            try
+            {
+                var userDetailWindow = new UserDetailWindow();
+                userDetailWindow.Show();
+                CloseCurrentWindow();
+            }
+            catch 
+            {
+                MessageBox.Show("Du kan inte ändra inställningar som admin, logga in som vanlig användare!");
+            }
         }
 
         private void SignOut() //metod för att logga ut

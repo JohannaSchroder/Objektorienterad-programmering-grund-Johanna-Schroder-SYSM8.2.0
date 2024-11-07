@@ -53,13 +53,15 @@ namespace FIT_TRACK2
         public ICommand SignUpCommand { get; }
         private void SignIn()//metod för att logga in
         {
-            /*if (UserNameBox == "admin" && PasswordBox == "password")
+            if (UserNameBox == "admin" && PasswordBox == "password")
             {
+                AdminUser adminUser = new AdminUser("admin","password","Sweden");
+                adminUser.MenageAllWorkouts();
                 WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                 workoutsWindow.Show();
                 Application.Current.MainWindow.Close();
-            }*/
-           if (_userService.Login(UserNameBox, PasswordBox))
+            }
+           else if (_userService.Login(UserNameBox, PasswordBox))
            {
                 User u = new User(UserNameBox, PasswordBox, "Sweden");
                 u.SignIn();

@@ -24,7 +24,7 @@
             FontSize="50" 
             Foreground="#DC143C"/>
         <TextBlock 
-            Text="{Binding UserName}"
+            Text="{Binding Username}"
             x:Name="User"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"

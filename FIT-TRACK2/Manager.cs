@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,12 +22,13 @@ namespace FIT_TRACK2
         
         public User CurrentUser { get; set; }//egenskap för att hämta inloggad användare
 
-        public User CurrentAdmin { get; set; }//för inloggad admin
-
         private UserService()
         {
-            ListaUsers = new List<User>();
-            ListaUsers.Add(new User ("admin", "password", "Sweden"));//en sparad användare från start
+            ListaUsers = new List<User>
+            {
+                new User("admin","password","Sweden") {UserName = "admin",
+                Password = "password", Country = "Sweden", IsAdmin = true }
+            };//en sparad admin-användare från start
         }
         public static UserService Instance
         {
@@ -70,7 +72,7 @@ namespace FIT_TRACK2
 
         public bool currentAdmin()//kollar om den inloggade är admin
         {
-            return true; 
+            return CurrentUser != null && CurrentUser.IsAdmin;
         }
 
     }

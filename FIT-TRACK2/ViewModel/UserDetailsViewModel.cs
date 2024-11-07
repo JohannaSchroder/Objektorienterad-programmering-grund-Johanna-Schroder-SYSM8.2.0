@@ -52,12 +52,13 @@ namespace FIT_TRACK2.ViewModel
             _userService = UserService.Instance;//UserService
             NewUserNameInput = _userService.CurrentUser.UserName; 
 			NewValtLand = _userService.CurrentUser.Country;
+			NewPasswordInput = _userService.CurrentUser.Password;
             Land = new ObservableCollection<string> { "Sweden", "Denmark", "Norway", "Finland", "Iceland" };//lista med land
             UptadeUserCommand = new RelayCommand(Spara); 
 			GoBackCommand = new RelayCommand(GoBack);
         }
 
-		private void Spara()//metod för att spara ntt användarnamn och lösenord
+		private void Spara()//metod för att spara nytt användarnamn och lösenord
 		{
             if (NewPasswordInput.Length < 5) 
 			{ 
@@ -79,9 +80,9 @@ namespace FIT_TRACK2.ViewModel
 				MessageBox.Show("Användarnamnet är redan upptaget."); 
 				return; 
 			}
-            _userService.CurrentUser.Password = NewPasswordInput;
-        
-			_userService.CurrentUser.UserName = NewUserNameInput; _userService.CurrentUser.Country = NewValtLand;
+            _userService.CurrentUser.Password = NewPasswordInput; //lägger in de nya värderna       
+			_userService.CurrentUser.UserName = NewUserNameInput; 
+			_userService.CurrentUser.Country = NewValtLand;
 			MessageBox.Show("Dina nya uppgifter är sparade! Du går nu tillbaka till träningssidan.");
             WorkoutsWindow workoutsWindow = new WorkoutsWindow();
             workoutsWindow.Show();

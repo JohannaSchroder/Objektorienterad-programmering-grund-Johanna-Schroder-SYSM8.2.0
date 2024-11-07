@@ -74,6 +74,7 @@ namespace FIT_TRACK2.ViewModel
                string.IsNullOrWhiteSpace(Notes))
             {
                 MessageBox.Show("Du måste fylla i alla rutor!");
+                return;
             }
             if (WorkoutType == WorkoutType)//kollar vad som srivs i rutan
             {
