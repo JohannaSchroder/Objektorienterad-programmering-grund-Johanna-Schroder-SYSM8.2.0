@@ -14,6 +14,7 @@ namespace FIT_TRACK2.Klasser
         public TimeSpan Duration { get; set; }
         public int CaloriesBurned { get; set; }
         public string Notes { get; set; }
+        public object Id { get; internal set; }
 
 
         //konstruktor

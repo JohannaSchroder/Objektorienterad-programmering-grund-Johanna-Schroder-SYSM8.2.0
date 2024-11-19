@@ -22,7 +22,7 @@ namespace FIT_TRACK2.ViewModel
             set
             {
                 _date = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Date));
             }
         }
 
@@ -33,7 +33,7 @@ namespace FIT_TRACK2.ViewModel
             set
             {
                 _type = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(WorkoutType));
             }
         }
 
@@ -44,7 +44,7 @@ namespace FIT_TRACK2.ViewModel
             set
             {
                 _duration = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Duration));
             }
         }
 
@@ -55,7 +55,7 @@ namespace FIT_TRACK2.ViewModel
             set
             {
                 _caloriesburned = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(CaloriesBurned));
             }
         }
 
@@ -66,7 +66,7 @@ namespace FIT_TRACK2.ViewModel
             set
             {
                 _notes = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Notes));
             }
         }
 
@@ -74,7 +74,10 @@ namespace FIT_TRACK2.ViewModel
         public Workout Workout
         {
             get { return _workout; }
-            set { _workout = value; OnPropertyChanged(); }
+            set 
+            {   _workout = value; 
+                OnPropertyChanged(nameof(Workout)); 
+            }
         }
 
         private bool _isReadOnly = true;
@@ -121,8 +124,8 @@ namespace FIT_TRACK2.ViewModel
                _workout.Duration = Duration;
                _workout.CaloriesBurned = CaloriesBurned;
                _workout.Notes = Notes;
-               IsReadOnly = true;
                _workoutService.SaveWorkout(_workout);//uppdaterar träningspasset i WorkoutService
+               IsReadOnly = true;
                MessageBox.Show("Ditt träningspass är sparat! Du återgår nu till träningssidan.");
                WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                workoutsWindow.Show();

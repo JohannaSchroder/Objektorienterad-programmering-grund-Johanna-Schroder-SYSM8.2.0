@@ -99,10 +99,10 @@ namespace FIT_TRACK2
 
         private WorkoutService()
         {
-            _workouts = new ObservableCollection<Workout>();
+            _workouts = new List<Workout>();
         }
 
-        private ObservableCollection<Workout> _workouts; //lista som sparar träningspass
+        private List<Workout> _workouts; //lista som sparar träningspass
         public void AddWorkout(Workout workout) //medtod för att lägga till nytt träningspass
         {
             _workouts.Add(workout);
