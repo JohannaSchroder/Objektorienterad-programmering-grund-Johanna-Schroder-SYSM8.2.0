@@ -101,6 +101,7 @@ namespace FIT_TRACK2
         private WorkoutService()
         {
             _workouts = new ObservableCollection<Workout>();
+            StartWorkouts();
         }
         
         public ObservableCollection<Workout> _workouts; //lista som sparar träningspass
