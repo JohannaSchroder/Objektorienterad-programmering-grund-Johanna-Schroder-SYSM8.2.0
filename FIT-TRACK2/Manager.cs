@@ -124,7 +124,6 @@ namespace FIT_TRACK2
                 CurrentWorkout.Notes = workout.Notes;
             }
         }
-
         public IEnumerable<Workout> GetWorkouts() //metod för att visa alla träningspass
         { 
              return _workouts; 
