@@ -1,4 +1,5 @@
 ﻿using FIT_TRACK2.Klasser;
+using FIT_TRACK2.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -99,10 +100,19 @@ namespace FIT_TRACK2
 
         private WorkoutService()
         {
-            _workouts = new List<Workout>();
+            _workouts = new ObservableCollection<Workout>();
         }
+        
+        public ObservableCollection<Workout> _workouts; //lista som sparar träningspass
+        public void StartWorkouts()//lägger till träningspass i listan som ska finnas från start
+        {
+            var strengthWorkout = new StrengthWorkout(new DateTime(), "Strength", TimeSpan.FromMinutes(60), 100, "Strenght träning", 10);
 
-        private List<Workout> _workouts; //lista som sparar träningspass
+            var cardioWorkout = new CardioWorkout(new DateTime(), "Cardio", TimeSpan.FromMinutes(60), 100, "Cardio träning", 10000);
+
+            _workouts.Add(strengthWorkout);
+            _workouts.Add(cardioWorkout);
+        }
         public void AddWorkout(Workout workout) //medtod för att lägga till nytt träningspass
         {
             _workouts.Add(workout);
@@ -128,10 +138,9 @@ namespace FIT_TRACK2
         { 
              return _workouts; 
         }
-            public IEnumerable<Workout> GetWorkouts(IEnumerable<User> users)
-            {
-            // Implementera logik för att hämta träningspass för specifika användare
+        public IEnumerable<Workout> GetWorkouts(IEnumerable<User> users)
+        {
             return _workouts.Where(w => users.Any(u => u.UserName == w.Type));
-            }
+        }
     }
 }
