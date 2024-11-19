@@ -38,7 +38,6 @@ namespace FIT_TRACK2.ViewModel
             } 
         }
 
-
         //Kommandon
         public ICommand RemoveWorkoutCommand { get; set; }
         public ICommand SignOutCommand { get; }
@@ -48,13 +47,14 @@ namespace FIT_TRACK2.ViewModel
         public ICommand OpenUserDetailWindow { get; }
         public ICommand OpenAddWorkoutCommand { get; }
 
-        public bool IsAdmin => _userService.currentAdmin();
+        public bool IsAdmin => _userService.CurrentUser?.IsAdmin ?? false;
         public string Username => _userService.CurrentUser.UserName;//sätter användarnamn uppe i vänstra hörnet
         //konstruktor
         public WorkoutsViewModel()
         {
             _workoutService = WorkoutService.Instance; //hämta instansen av WorkoutService och UserService
             _userService = UserService.Instance;
+            CurrentUser = _userService.CurrentUser;
             ShowWorkoutsAdmin();
             //bindning till metoder
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkout, CanExecuteWorkoutCommand);
@@ -134,16 +134,9 @@ namespace FIT_TRACK2.ViewModel
 
         private void OpenUserDetail()//metod för att komma till UserDetail
         {
-            try
-            {
                 var userDetailWindow = new UserDetailWindow();
                 userDetailWindow.Show();
                 CloseCurrentWindow();
-            }
-            catch 
-            {
-                MessageBox.Show("Du kan inte ändra inställningar som admin, logga in som vanlig användare!");
-            }
         }
 
         private void SignOut() //metod för att logga ut

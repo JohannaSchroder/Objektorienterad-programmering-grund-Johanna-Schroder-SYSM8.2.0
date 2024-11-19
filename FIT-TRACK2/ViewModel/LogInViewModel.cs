@@ -53,24 +53,27 @@ namespace FIT_TRACK2
         public ICommand SignUpCommand { get; }
         private void SignIn()//metod för att logga in
         {
-            if (UserNameBox == "admin" && PasswordBox == "password")
+            if (_userService.Login(UserNameBox, PasswordBox))
             {
-                AdminUser adminUser = new AdminUser("admin","password","Sweden");
-                adminUser.MenageAllWorkouts();
-                WorkoutsWindow workoutsWindow = new WorkoutsWindow();
-                workoutsWindow.Show();
+                // om användaren är admin
+                if (_userService.CurrentUser != null && _userService.CurrentUser.IsAdmin)
+                {
+                    MessageBox.Show("Hej admin!");
+                    WorkoutsWindow workoutsWindow = new WorkoutsWindow();
+                    workoutsWindow.Show();
+                }
+                else
+                {
+                    // en registrerad användare som loggat in
+                    MessageBox.Show($"Hej {_username}! Dags att träna!");
+                    WorkoutsWindow workoutsWindow = new WorkoutsWindow();
+                    workoutsWindow.Show();
+                }
                 Application.Current.MainWindow.Close();
             }
-           else if (_userService.Login(UserNameBox, PasswordBox))
-           {
-                User u = new User(UserNameBox, PasswordBox, "Sweden");
-                u.SignIn();
-                WorkoutsWindow workoutsWindow = new WorkoutsWindow();
-                workoutsWindow.Show();
-                Application.Current.MainWindow.Close(); 
-           }
             else
             {
+                //användarnamn och lösenord hör inte ihop
                 MessageBox.Show("Fel användarnamn eller lösenord");
             }
         }
