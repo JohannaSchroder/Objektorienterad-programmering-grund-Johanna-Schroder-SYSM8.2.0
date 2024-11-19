@@ -1,6 +1,7 @@
 ﻿using FIT_TRACK2.Klasser;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.Metrics;
 using System.Linq;
@@ -81,7 +82,7 @@ namespace FIT_TRACK2
             CurrentUser = null; // tar bort användaren vid utloggning
         }
 
-            public bool currentAdmin()//kollar om den inloggade är admin
+        public bool currentAdmin()//kollar om den inloggade är admin
         {
             return CurrentUser != null && CurrentUser.IsAdmin;
         }
@@ -90,30 +91,44 @@ namespace FIT_TRACK2
 
 
 
-        internal class WorkoutService
-        {
+    internal class WorkoutService
+    {
         private static WorkoutService _instance;
         public static WorkoutService Instance => _instance ??= new WorkoutService();
-        
+
 
         private WorkoutService()
         {
-            _workouts = new List<Workout>();
+            _workouts = new ObservableCollection<Workout>();
         }
 
-        private List<Workout> _workouts; //lista som sparar träningspass
-            public void AddWorkout(Workout workout) //medtod för att lägga till nytt träningspass
-            { 
-                _workouts.Add(workout); 
+        private ObservableCollection<Workout> _workouts; //lista som sparar träningspass
+        public void AddWorkout(Workout workout) //medtod för att lägga till nytt träningspass
+        {
+            _workouts.Add(workout);
+        }
+        public void RemoveWorkout(Workout workout) //metod för att ta bort träningspass
+        {
+            _workouts.Remove(workout);
+        }
+
+        public void SaveWorkout(Workout workout)//metod för att spara ny data i ett befintligt träningspass
+        {
+            var CurrentWorkout = _workouts.FirstOrDefault(w => w.Date == workout.Date && w.Type == workout.Type);
+            if (CurrentWorkout != null)
+            {
+                CurrentWorkout.Date = workout.Date;
+                CurrentWorkout.Type = workout.Type;
+                CurrentWorkout.Duration = workout.Duration;
+                CurrentWorkout.CaloriesBurned = workout.CaloriesBurned;
+                CurrentWorkout.Notes = workout.Notes;
             }
-            public void RemoveWorkout(Workout workout) //metod för att ta bort träningspass
-            { 
-                _workouts.Remove(workout); 
-            }
-            public IEnumerable<Workout> GetWorkouts() //metod för att visa alla träningspass
-            { 
-                return _workouts; 
-            }
+        }
+
+        public IEnumerable<Workout> GetWorkouts() //metod för att visa alla träningspass
+        { 
+             return _workouts; 
+        }
             public IEnumerable<Workout> GetWorkouts(IEnumerable<User> users)
             {
             // Implementera logik för att hämta träningspass för specifika användare

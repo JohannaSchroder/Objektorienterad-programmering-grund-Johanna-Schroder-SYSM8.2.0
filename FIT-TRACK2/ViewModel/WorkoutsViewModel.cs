@@ -70,17 +70,13 @@ namespace FIT_TRACK2.ViewModel
 
 
         public ObservableCollection<Workout> Workouts { get; set; }//listor
-        public ObservableCollection<Workout> SelectedWorkouts { get; set; }
+        public ObservableCollection<Workout> SelectedWorkouts { get; set; }//listor
 
         private void AddWorkouts()//lägger till träningspass i listan
         {
-            var strengthWorkout = new StrengthWorkout(DateTime.Now, "Strength", TimeSpan.Zero, 100, "Strenght träning", 10)
-            {
-            };
+            var strengthWorkout = new StrengthWorkout(new DateTime(), "Strength", TimeSpan.FromMinutes(60), 100, "Strenght träning", 10);
 
-            var cardioWorkout = new CardioWorkout(DateTime.Now, "Cardio", TimeSpan.Zero, 100, "Cardio träning", 10000)
-            {
-            };
+            var cardioWorkout = new CardioWorkout(new DateTime(), "Cardio", TimeSpan.FromMinutes(60), 100, "Cardio träning", 10000);
 
             Workouts.Add(strengthWorkout);
             Workouts.Add(cardioWorkout);

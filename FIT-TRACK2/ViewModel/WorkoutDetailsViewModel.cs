@@ -2,6 +2,7 @@
 using FIT_TRACK2.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -121,7 +122,7 @@ namespace FIT_TRACK2.ViewModel
                _workout.CaloriesBurned = CaloriesBurned;
                _workout.Notes = Notes;
                IsReadOnly = true;
-               _workoutService.AddWorkout(_workout);//uppdaterar träningspasset i WorkoutService
+               _workoutService.SaveWorkout(_workout);//uppdaterar träningspasset i WorkoutService
                MessageBox.Show("Ditt träningspass är sparat! Du återgår nu till träningssidan.");
                WorkoutsWindow workoutsWindow = new WorkoutsWindow();
                workoutsWindow.Show();
